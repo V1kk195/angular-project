@@ -6,5 +6,6 @@ import { SearchComponent } from './search/search.component';
 @NgModule({
     declarations: [BreadcrumbsComponent, SearchComponent],
     imports: [CommonModule],
+    exports: [BreadcrumbsComponent],
 })
 export class SharedModule {}

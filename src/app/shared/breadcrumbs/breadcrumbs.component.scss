@@ -1,0 +1,16 @@
+.container {
+    background-color: #ffffff;
+    height: 64px;
+    display: flex;
+    align-items: center;
+
+    > div {
+        width: 1110px;
+        margin: 0 auto;
+
+        > span {
+            color: #464a5a;
+            font-weight: 700;
+        }
+    }
+}
