@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Course } from '../course/course';
 import { courses } from './mock-courses';
 
@@ -7,6 +7,14 @@ import { courses } from './mock-courses';
     templateUrl: './courses-list.component.html',
     styleUrls: ['./courses-list.component.scss'],
 })
-export class CoursesListComponent {
-    public courses: Course[] = courses;
+export class CoursesListComponent implements OnInit {
+    public courses?: Course[];
+
+    public ngOnInit() {
+        this.courses = courses;
+    }
+
+    public onClick() {
+        console.log('Load more courses clicked');
+    }
 }
