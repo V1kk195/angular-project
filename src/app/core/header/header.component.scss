@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    background-color: #303240;
+    color: #ffffff;
+    height: 60px;
+    align-items: center;
+    padding-right: 85px;
+    padding-left: 85px;
+
+    .logo {
+        font-size: 18px;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 24px;
+    }
+}

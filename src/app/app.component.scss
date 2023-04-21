@@ -1,0 +1,11 @@
+.root-container {
+    height: 100vh;
+    background-color: #f5f6fa;
+
+    main {
+        max-width: 1110px;
+        height: calc(100% - 84px);
+        margin: 0 auto;
+        padding: 24px 0;
+    }
+}
