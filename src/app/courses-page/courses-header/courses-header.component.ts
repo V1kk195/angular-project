@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
     styleUrls: ['./courses-header.component.scss'],
 })
 export class CoursesHeaderComponent {
-    public searchValue?: string;
+    public searchValue = '';
 
     public onSearch(): void {
         console.log(`Searching for ${this.searchValue}`);

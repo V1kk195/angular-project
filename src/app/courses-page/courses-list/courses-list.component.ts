@@ -21,4 +21,8 @@ export class CoursesListComponent implements OnInit {
     public onDeleteCourse(courseId: string): void {
         console.log(`Deleted course ${courseId}`);
     }
+
+    public courseTrackBy(index: number, course: Course): string {
+        return course.id;
+    }
 }
