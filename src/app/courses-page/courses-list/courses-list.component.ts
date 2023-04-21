@@ -10,11 +10,11 @@ import { courses } from './mock-courses';
 export class CoursesListComponent implements OnInit {
     public courses?: Course[];
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         this.courses = courses;
     }
 
-    public onClick() {
+    public onClick(): void {
         console.log('Load more courses clicked');
     }
 }

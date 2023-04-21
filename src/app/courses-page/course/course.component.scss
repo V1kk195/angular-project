@@ -20,4 +20,17 @@
             margin-left: 24px;
         }
     }
+
+    .row {
+        display: flex;
+        gap: 12px;
+
+        .buttons {
+            width: 30%;
+
+            > button:first-of-type {
+                margin-right: 12px;
+            }
+        }
+    }
 }

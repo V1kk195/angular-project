@@ -8,4 +8,12 @@ import { Course } from './course';
 })
 export class CourseComponent {
     @Input() course?: Course;
+
+    public onEdit(): void {
+        console.log('Clicked edit button');
+    }
+
+    public onDelete(): void {
+        console.log('Clicked delete button');
+    }
 }

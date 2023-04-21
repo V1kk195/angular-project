@@ -8,5 +8,11 @@
         </div>
     </div>
 
-    <p>{{ course?.description }}</p>
+    <div class="row">
+        <p>{{ course?.description }}</p>
+        <div class="buttons">
+            <button (click)="onEdit()">Edit</button>
+            <button (click)="onDelete()">Delete</button>
+        </div>
+    </div>
 </div>

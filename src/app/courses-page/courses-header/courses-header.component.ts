@@ -7,7 +7,12 @@ import { Component } from '@angular/core';
 })
 export class CoursesHeaderComponent {
     public searchValue?: string;
+
     public onSearch(): void {
         console.log(`Searching for ${this.searchValue}`);
+    }
+
+    public onAddCourseClick(): void {
+        console.log(`Add Course Clicked`);
     }
 }

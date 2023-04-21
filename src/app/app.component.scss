@@ -4,7 +4,8 @@
 
     main {
         max-width: 1110px;
-        margin: 0 auto calc(60px + 24px);
+        height: calc(100% - 84px);
+        margin: 0 auto;
         padding: 24px 0;
     }
 }
