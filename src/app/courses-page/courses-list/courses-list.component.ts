@@ -14,7 +14,11 @@ export class CoursesListComponent implements OnInit {
         this.courses = courses;
     }
 
-    public onClick(): void {
+    public onLoadMoreClick(): void {
         console.log('Load more courses clicked');
+    }
+
+    public onDeleteCourse(courseId: string): void {
+        console.log(`Deleted course ${courseId}`);
     }
 }

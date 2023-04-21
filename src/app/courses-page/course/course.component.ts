@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Course } from './course';
 
 @Component({
@@ -8,12 +8,13 @@ import { Course } from './course';
 })
 export class CourseComponent {
     @Input() course?: Course;
+    @Output() courseDeleted = new EventEmitter<string>();
 
     public onEdit(): void {
         console.log('Clicked edit button');
     }
 
     public onDelete(): void {
-        console.log('Clicked delete button');
+        this.courseDeleted.emit(this.course?.id);
     }
 }
