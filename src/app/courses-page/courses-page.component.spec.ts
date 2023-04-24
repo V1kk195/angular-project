@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesPageComponent } from './courses-page.component';
+import { CoursesHeaderComponent } from './courses-header/courses-header.component';
+import { CoursesListComponent } from './courses-list/courses-list.component';
+import { FormsModule } from '@angular/forms';
+import { CourseComponent } from './course/course.component';
 
 describe('CoursesPageComponent', () => {
     let component: CoursesPageComponent;
@@ -8,7 +12,13 @@ describe('CoursesPageComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [CoursesPageComponent],
+            declarations: [
+                CoursesPageComponent,
+                CoursesHeaderComponent,
+                CoursesListComponent,
+                CourseComponent,
+            ],
+            imports: [FormsModule],
         }).compileComponents();
 
         fixture = TestBed.createComponent(CoursesPageComponent);

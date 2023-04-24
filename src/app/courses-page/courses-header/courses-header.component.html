@@ -1,8 +1,10 @@
 <div class="container">
     <div class="search">
         <input [(ngModel)]="searchValue" placeholder="Type to search" />
-        <button (click)="onSearch()">Search</button>
+        <button (click)="onSearch()" class="search-button">Search</button>
     </div>
 
-    <button (click)="onAddCourseClick()">+ Add course</button>
+    <button (click)="onAddCourseClick()" class="add-course-button">
+        + Add course
+    </button>
 </div>
