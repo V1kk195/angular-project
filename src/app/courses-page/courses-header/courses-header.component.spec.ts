@@ -21,4 +21,33 @@ describe('CoursesHeaderComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    it('should search for query on input text', () => {
+        const componentElem = fixture.nativeElement;
+        const input: HTMLInputElement = componentElem.querySelector('input');
+        const searchButton: HTMLButtonElement =
+            componentElem.querySelector('.search-button');
+        const consoleSpy = spyOn(console, 'log');
+
+        input.value = 'video 2';
+        input.dispatchEvent(new Event('input'));
+        fixture.detectChanges();
+
+        expect(component.searchValue).toBe('video 2');
+
+        searchButton.click();
+
+        expect(consoleSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call #onAddCourseClick() on Add Course button click', () => {
+        const componentElem = fixture.nativeElement;
+        const button: HTMLButtonElement =
+            componentElem.querySelector('.add-course-button');
+        const consoleSpy = spyOn(console, 'log');
+
+        button.click();
+
+        expect(consoleSpy).toHaveBeenCalledTimes(1);
+    });
 });

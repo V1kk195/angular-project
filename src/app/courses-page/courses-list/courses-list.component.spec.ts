@@ -46,10 +46,10 @@ describe('CoursesListComponent', () => {
         const componentEl: HTMLElement = fixture.nativeElement;
         const buttonEl: HTMLButtonElement | null =
             componentEl.querySelector('.delete-button');
-        const deleteFunction = spyOn(component, 'onDeleteCourse');
+        const consoleSpy = spyOn(console, 'log');
 
         buttonEl?.click();
 
-        expect(deleteFunction).toHaveBeenCalled();
+        expect(consoleSpy).toHaveBeenCalled();
     });
 });
