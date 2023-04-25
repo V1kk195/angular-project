@@ -1,10 +1,10 @@
-<div class="container">
+<div class="container" [appCourseBorder]="course?.creationDate!">
     <div class="info">
         <h2>{{ course?.title }}</h2>
 
         <div>
             <span>{{ course?.duration }} min</span>
-            <span>{{ course?.creationDate }}</span>
+            <span>{{ course?.creationDate | date : 'MM/dd/yyyy' }}</span>
         </div>
     </div>
 

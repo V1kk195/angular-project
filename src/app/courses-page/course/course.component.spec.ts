@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseComponent } from './course.component';
-import { courses } from '../courses-list/mock-courses';
+import { courses } from '../mock-courses';
 import { Course } from './course';
 import { first } from 'rxjs';
 import { CoursesListComponent } from '../courses-list/courses-list.component';

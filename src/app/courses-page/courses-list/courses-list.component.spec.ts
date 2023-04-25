@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesListComponent } from './courses-list.component';
 import { CourseComponent } from '../course/course.component';
-import { courses } from './mock-courses';
+import { courses } from '../mock-courses';
 
 describe('CoursesListComponent', () => {
     let component: CoursesListComponent;
