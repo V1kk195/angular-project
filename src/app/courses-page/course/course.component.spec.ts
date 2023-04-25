@@ -5,6 +5,8 @@ import { courses } from '../mock-courses';
 import { Course } from './course';
 import { first } from 'rxjs';
 import { CoursesListComponent } from '../courses-list/courses-list.component';
+import { CourseBorderDirective } from './course-border.directive';
+import { DatePipe } from '@angular/common';
 
 //  standalone test
 describe('CourseComponent', () => {
@@ -13,7 +15,7 @@ describe('CourseComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [CourseComponent],
+            declarations: [CourseComponent, CourseBorderDirective],
         }).compileComponents();
 
         fixture = TestBed.createComponent(CourseComponent);
@@ -35,7 +37,12 @@ describe('CourseComponent', () => {
         expect(courseElement.textContent).toContain(
             `${courses[0].duration} min`
         );
-        expect(courseElement.textContent).toContain(courses[0].creationDate);
+        expect(courseElement.textContent).toContain(
+            new DatePipe('en-US').transform(
+                courses[0].creationDate,
+                'MM/dd/yyyy'
+            )
+        );
         expect(courseElement.textContent).toContain(courses[0].description);
     });
 
@@ -93,7 +100,11 @@ describe('CourseComponent in host CoursesListComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [CoursesListComponent, CourseComponent],
+            declarations: [
+                CoursesListComponent,
+                CourseComponent,
+                CourseBorderDirective,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(CoursesListComponent);
