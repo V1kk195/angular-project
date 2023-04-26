@@ -7,6 +7,7 @@ import { first } from 'rxjs';
 import { CoursesListComponent } from '../courses-list/courses-list.component';
 import { CourseBorderDirective } from './course-border.directive';
 import { DatePipe } from '@angular/common';
+import { SharedModule } from '../../shared/shared.module';
 
 //  standalone test
 describe('CourseComponent', () => {
@@ -16,6 +17,7 @@ describe('CourseComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [CourseComponent, CourseBorderDirective],
+            imports: [SharedModule],
         }).compileComponents();
 
         fixture = TestBed.createComponent(CourseComponent);
@@ -33,10 +35,8 @@ describe('CourseComponent', () => {
 
         fixture.detectChanges();
 
-        expect(courseElement.textContent).toContain(courses[0].title);
-        expect(courseElement.textContent).toContain(
-            `${courses[0].duration} min`
-        );
+        expect(courseElement.textContent).toContain('Video Course 1');
+        expect(courseElement.textContent).toContain('2h 40min');
         expect(courseElement.textContent).toContain(
             new DatePipe('en-US').transform(
                 courses[0].creationDate,
@@ -105,6 +105,7 @@ describe('CourseComponent in host CoursesListComponent', () => {
                 CourseComponent,
                 CourseBorderDirective,
             ],
+            imports: [SharedModule],
         }).compileComponents();
 
         fixture = TestBed.createComponent(CoursesListComponent);

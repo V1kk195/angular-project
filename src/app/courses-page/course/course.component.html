@@ -5,7 +5,7 @@
 >
     <div class="info">
         <div class="title">
-            <h2>{{ course?.title }}</h2>
+            <h2>{{ course?.title | titlecase }}</h2>
             <svg
                 *ngIf="course?.topRated"
                 xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +22,7 @@
         </div>
 
         <div>
-            <span>{{ course?.duration }} min</span>
+            <span>{{ course?.duration | minsToHours }}</span>
             <span>{{ course?.creationDate | date : 'MM/dd/yyyy' }}</span>
         </div>
     </div>

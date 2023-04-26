@@ -4,6 +4,7 @@ import { CoursesListComponent } from './courses-list.component';
 import { CourseComponent } from '../course/course.component';
 import { courses } from '../mock-courses';
 import { CourseBorderDirective } from '../course/course-border.directive';
+import { SharedModule } from '../../shared/shared.module';
 
 describe('CoursesListComponent', () => {
     let component: CoursesListComponent;
@@ -16,6 +17,7 @@ describe('CoursesListComponent', () => {
                 CourseComponent,
                 CourseBorderDirective,
             ],
+            imports: [SharedModule],
         }).compileComponents();
 
         fixture = TestBed.createComponent(CoursesListComponent);
