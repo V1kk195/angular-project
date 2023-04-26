@@ -4,7 +4,17 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'orderBy',
 })
 export class OrderByPipe implements PipeTransform {
-    transform(value: Record<string, any>[] = [], property: string): any[] {
-        return [...value].sort((a, b) => a[property] - b[property]);
+    transform(
+        value: Record<string, any>[] = [],
+        property: string,
+        direction: 'asc' | 'desc' = 'asc'
+    ): any[] {
+        return [...value].sort((a, b) => {
+            if (direction === 'asc') {
+                return a[property] - b[property];
+            }
+
+            return b[property] - a[property];
+        });
     }
 }
