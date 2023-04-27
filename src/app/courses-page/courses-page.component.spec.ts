@@ -5,6 +5,8 @@ import { CoursesHeaderComponent } from './courses-header/courses-header.componen
 import { CoursesListComponent } from './courses-list/courses-list.component';
 import { FormsModule } from '@angular/forms';
 import { CourseComponent } from './course/course.component';
+import { CourseBorderDirective } from './course/course-border.directive';
+import { SharedModule } from '../shared/shared.module';
 
 describe('CoursesPageComponent', () => {
     let component: CoursesPageComponent;
@@ -17,8 +19,9 @@ describe('CoursesPageComponent', () => {
                 CoursesHeaderComponent,
                 CoursesListComponent,
                 CourseComponent,
+                CourseBorderDirective,
             ],
-            imports: [FormsModule],
+            imports: [FormsModule, SharedModule],
         }).compileComponents();
 
         fixture = TestBed.createComponent(CoursesPageComponent);

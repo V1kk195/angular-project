@@ -6,6 +6,8 @@ import { CoursesPageComponent } from './courses-page.component';
 import { CoreModule } from '../core/core.module';
 import { CoursesHeaderComponent } from './courses-header/courses-header.component';
 import { FormsModule } from '@angular/forms';
+import { CourseBorderDirective } from './course/course-border.directive';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -13,8 +15,9 @@ import { FormsModule } from '@angular/forms';
         CourseComponent,
         CoursesPageComponent,
         CoursesHeaderComponent,
+        CourseBorderDirective,
     ],
-    imports: [CommonModule, CoreModule, FormsModule],
+    imports: [CommonModule, CoreModule, FormsModule, SharedModule],
     exports: [CoursesPageComponent],
 })
 export class CoursesPageModule {}

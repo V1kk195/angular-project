@@ -1,9 +1,19 @@
-<ul class="container">
-    <li *ngFor="let course of courses; trackBy: courseTrackBy">
-        <app-course
-            [course]="course"
-            (courseDeleted)="onDeleteCourse($event)"
-        ></app-course>
-    </li>
-</ul>
-<button class="load-button" (click)="onLoadMoreClick()">Load more</button>
+<ng-container *ngIf="courses?.length; else elseBlock">
+    <ul class="container">
+        <li
+            *ngFor="
+                let course of courses | orderBy : 'creationDate';
+                trackBy: courseTrackBy
+            "
+        >
+            <app-course
+                [course]="course"
+                (courseDeleted)="onDeleteCourse($event)"
+            ></app-course>
+        </li>
+    </ul>
+    <button class="load-button" (click)="onLoadMoreClick()">Load more</button>
+</ng-container>
+<ng-template #elseBlock>
+    <div class="no-data">No data. Feel free to add new courses</div>
+</ng-template>
