@@ -5,6 +5,7 @@ import { SearchComponent } from './search/search.component';
 import { MinsToHoursPipe } from './pipes/mins-to-hours.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -14,7 +15,13 @@ import { FilterPipe } from './pipes/filter.pipe';
         OrderByPipe,
         FilterPipe,
     ],
-    imports: [CommonModule],
-    exports: [BreadcrumbsComponent, MinsToHoursPipe, OrderByPipe],
+    imports: [CommonModule, FormsModule],
+    exports: [
+        CommonModule,
+        FormsModule,
+        BreadcrumbsComponent,
+        MinsToHoursPipe,
+        OrderByPipe,
+    ],
 })
 export class SharedModule {}
