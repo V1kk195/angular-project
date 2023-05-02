@@ -1,25 +1,32 @@
-import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
-import { AuthService } from '../../core/auth.service';
+import {
+    Directive,
+    Input,
+    OnInit,
+    TemplateRef,
+    ViewContainerRef,
+} from '@angular/core';
 
 @Directive({
     selector: '[appIfAuthenticated]',
 })
-export class IfAuthenticatedDirective {
+export class IfAuthenticatedDirective implements OnInit {
     private hasView = false;
+    private isAuth = false;
+
+    @Input() set appIfAuthenticated(condition: boolean) {
+        this.isAuth = condition;
+    }
 
     constructor(
         private templateRef: TemplateRef<any>,
-        private viewContainer: ViewContainerRef,
-        private authService: AuthService
+        private viewContainer: ViewContainerRef
     ) {}
 
-    @Input() appUnless() {
-        const isAuth = this.authService.isAuthenticated;
-
-        if (isAuth && !this.hasView) {
+    public ngOnInit() {
+        if (this.isAuth && !this.hasView) {
             this.viewContainer.createEmbeddedView(this.templateRef);
             this.hasView = true;
-        } else if (!isAuth && this.hasView) {
+        } else if (!this.isAuth && this.hasView) {
             this.viewContainer.clear();
             this.hasView = false;
         }

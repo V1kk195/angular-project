@@ -9,6 +9,7 @@ export class AuthService {
     public logIn(userInfo: { email: string; password: string }): void {
         localStorage.setItem('user', JSON.stringify(userInfo));
         localStorage.setItem('token', `${userInfo.email}-fake-token`);
+        console.log('logged in successfully', userInfo);
     }
 
     public logOut(): void {

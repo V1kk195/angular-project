@@ -8,14 +8,21 @@
                 placeholder="example@mail.com"
                 name="email"
                 required
+                [(ngModel)]="email"
             />
         </label>
 
         <label>
             Password
-            <input type="password" name="password" required />
+            <input
+                type="password"
+                name="password"
+                placeholder="************"
+                required
+                [(ngModel)]="password"
+            />
         </label>
 
-        <button>Login</button>
+        <button (click)="onLogIn()">Login</button>
     </div>
 </div>
