@@ -6,6 +6,7 @@ import { MinsToHoursPipe } from './pipes/mins-to-hours.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { FormsModule } from '@angular/forms';
+import { IfAuthenticatedDirective } from './ifAuthenticated/if-authenticated.directive';
 
 @NgModule({
     declarations: [
@@ -14,6 +15,7 @@ import { FormsModule } from '@angular/forms';
         MinsToHoursPipe,
         OrderByPipe,
         FilterPipe,
+        IfAuthenticatedDirective,
     ],
     imports: [CommonModule, FormsModule],
     exports: [
@@ -22,6 +24,7 @@ import { FormsModule } from '@angular/forms';
         BreadcrumbsComponent,
         MinsToHoursPipe,
         OrderByPipe,
+        IfAuthenticatedDirective,
     ],
 })
 export class SharedModule {}

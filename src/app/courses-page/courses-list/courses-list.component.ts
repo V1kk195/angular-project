@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../course/course';
-import { courses } from '../mock-courses';
+import { CoursesService } from '../../core/courses.service';
 
 @Component({
     selector: 'app-courses-list',
@@ -8,10 +8,16 @@ import { courses } from '../mock-courses';
     styleUrls: ['./courses-list.component.scss'],
 })
 export class CoursesListComponent implements OnInit {
-    public courses?: Course[];
+    public courses: Course[] = [];
+
+    constructor(private coursesService: CoursesService) {}
 
     public ngOnInit(): void {
-        this.courses = courses;
+        this.getCourses();
+    }
+
+    private getCourses(): void {
+        this.courses = this.coursesService.getCourses();
     }
 
     public onLoadMoreClick(): void {
@@ -20,6 +26,11 @@ export class CoursesListComponent implements OnInit {
 
     public onDeleteCourse(courseId: string): void {
         console.log(`Deleted course ${courseId}`);
+        const res = confirm('Do you really want to delete this course?');
+
+        if (res) {
+            this.coursesService.deleteCourse(courseId);
+        }
     }
 
     public courseTrackBy(index: number, course: Course): string {

@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="form">
+        <h1>Login</h1>
+        <label>
+            Email
+            <input
+                type="email"
+                placeholder="example@mail.com"
+                name="email"
+                required
+                [(ngModel)]="email"
+            />
+        </label>
+
+        <label>
+            Password
+            <input
+                type="password"
+                name="password"
+                placeholder="************"
+                required
+                [(ngModel)]="password"
+            />
+        </label>
+
+        <button (click)="onLogIn()">Login</button>
+    </div>
+</div>
