@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CoursesPageModule } from './courses-page/courses-page.module';
 import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from './layout/layout.module';
+import { LoginPageModule } from './login-page/login-page.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -15,6 +16,7 @@ import { LayoutModule } from './layout/layout.module';
         CoursesPageModule,
         SharedModule,
         LayoutModule,
+        LoginPageModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
