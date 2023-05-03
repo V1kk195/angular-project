@@ -8,4 +8,8 @@ import { AuthService } from '../../core/auth.service';
 })
 export class HeaderComponent {
     constructor(public authService: AuthService) {}
+
+    public onLogOut() {
+        this.authService.logOut();
+    }
 }

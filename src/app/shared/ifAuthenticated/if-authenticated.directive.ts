@@ -15,6 +15,7 @@ export class IfAuthenticatedDirective implements OnInit {
 
     @Input() set appIfAuthenticated(condition: boolean) {
         this.isAuth = condition;
+        this.displayTemplate();
     }
 
     constructor(
@@ -23,6 +24,10 @@ export class IfAuthenticatedDirective implements OnInit {
     ) {}
 
     public ngOnInit() {
+        this.displayTemplate();
+    }
+
+    private displayTemplate() {
         if (this.isAuth && !this.hasView) {
             this.viewContainer.createEmbeddedView(this.templateRef);
             this.hasView = true;
