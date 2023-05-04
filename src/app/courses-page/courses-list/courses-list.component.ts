@@ -30,6 +30,7 @@ export class CoursesListComponent implements OnInit {
 
         if (res) {
             this.coursesService.deleteCourse(courseId);
+            this.getCourses();
         }
     }
 
