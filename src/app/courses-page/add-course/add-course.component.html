@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="form">
+        <h1>New course</h1>
+        <label>
+            Title:
+            <input
+                type="text"
+                placeholder="Input title"
+                name="title"
+                required
+                [(ngModel)]="title"
+            />
+        </label>
+
+        <label>
+            Decription:
+            <textarea
+                type="text"
+                placeholder="Add description"
+                name="description"
+                required
+                rows="4"
+                [(ngModel)]="description"
+            ></textarea>
+        </label>
+
+        <app-duration-field></app-duration-field>
+        <app-date-field></app-date-field>
+        <app-authors-field></app-authors-field>
+
+        <div class="buttons">
+            <button class="button-cancel">Cancel</button>
+            <button class="button-submit">Save</button>
+        </div>
+    </div>
+</div>

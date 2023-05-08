@@ -6,6 +6,10 @@ import { CoursesPageComponent } from './courses-page.component';
 import { CoursesHeaderComponent } from './courses-header/courses-header.component';
 import { CourseBorderDirective } from './course/course-border.directive';
 import { SharedModule } from '../shared/shared.module';
+import { AddCourseComponent } from './add-course/add-course.component';
+import { DurationFieldComponent } from './add-course/duration-field/duration-field.component';
+import { DateFieldComponent } from './add-course/date-field/date-field.component';
+import { AuthorsFieldComponent } from './add-course/authors-field/authors-field.component';
 
 @NgModule({
     declarations: [
@@ -14,6 +18,10 @@ import { SharedModule } from '../shared/shared.module';
         CoursesPageComponent,
         CoursesHeaderComponent,
         CourseBorderDirective,
+        AddCourseComponent,
+        DurationFieldComponent,
+        DateFieldComponent,
+        AuthorsFieldComponent,
     ],
     imports: [SharedModule],
     exports: [CoursesPageComponent],
