@@ -1,10 +1,13 @@
-<label class="label">
-    Duration:
-    <input
-        type="number"
-        placeholder="minutes"
-        name="duration"
-        required
-        [(ngModel)]="duration"
-    />
-</label>
+<div class="durationRow">
+    <label class="label">
+        Duration:
+        <input
+            type="number"
+            placeholder="minutes"
+            name="duration"
+            required
+            [(ngModel)]="duration"
+        />
+    </label>
+    <span class="hours">{{ duration | minsToHours }}</span>
+</div>

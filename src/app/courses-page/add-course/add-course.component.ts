@@ -15,4 +15,12 @@ import {
 export class AddCourseComponent {
     @Input() title = '';
     @Input() description = '';
+
+    public onCancel(): void {
+        console.log('cancelled adding course');
+    }
+
+    public onSave(): void {
+        console.log('added course');
+    }
 }
