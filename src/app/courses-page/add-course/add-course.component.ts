@@ -10,7 +10,7 @@ import {
     templateUrl: './add-course.component.html',
     styleUrls: ['./add-course.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class AddCourseComponent {
     @Input() title = '';

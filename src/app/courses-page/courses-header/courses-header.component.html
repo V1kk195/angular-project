@@ -4,7 +4,11 @@
         <button (click)="onSearch()" class="search-button">Search</button>
     </div>
 
-    <button (click)="onAddCourseClick()" class="add-course-button">
+    <button
+        (click)="onAddCourseClick()"
+        routerLink="/courses/new"
+        class="add-course-button"
+    >
         + Add course
     </button>
 </div>

@@ -10,6 +10,7 @@ import { AddCourseComponent } from './add-course/add-course.component';
 import { DurationFieldComponent } from './add-course/duration-field/duration-field.component';
 import { DateFieldComponent } from './add-course/date-field/date-field.component';
 import { AuthorsFieldComponent } from './add-course/authors-field/authors-field.component';
+import { RouterLink } from '@angular/router';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,7 @@ import { AuthorsFieldComponent } from './add-course/authors-field/authors-field.
         DateFieldComponent,
         AuthorsFieldComponent,
     ],
-    imports: [SharedModule],
+    imports: [SharedModule, RouterLink],
     exports: [CoursesPageComponent],
 })
 export class CoursesPageModule {}
