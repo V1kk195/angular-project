@@ -1,1 +1,6 @@
-<app-add-edit-course-form type="edit"></app-add-edit-course-form>
+<app-add-edit-course-form
+    type="edit"
+    [title]="courseInfo?.title!"
+    [description]="courseInfo?.description!"
+    (saveEvent)="onSave($event)"
+></app-add-edit-course-form>
