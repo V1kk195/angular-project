@@ -6,6 +6,7 @@ import {
     Output,
 } from '@angular/core';
 import { Course } from './course';
+import { ROUTES_NAMES } from '../../core/routes';
 
 @Component({
     selector: 'app-course',
@@ -16,6 +17,8 @@ import { Course } from './course';
 export class CourseComponent {
     @Input() course?: Course;
     @Output() courseDeleted = new EventEmitter<string>();
+
+    public courseLink = `/${ROUTES_NAMES.courses}`;
 
     public onEdit(): void {
         console.log('Clicked edit button');

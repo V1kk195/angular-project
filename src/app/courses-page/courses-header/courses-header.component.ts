@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ROUTES_NAMES } from '../../core/routes';
 
 @Component({
     selector: 'app-courses-header',
@@ -7,6 +8,7 @@ import { Component } from '@angular/core';
 })
 export class CoursesHeaderComponent {
     public searchValue = '';
+    public addCourseLink = `/${ROUTES_NAMES.addCourse}`;
 
     public onSearch(): void {
         console.log(`Searching for ${this.searchValue}`);

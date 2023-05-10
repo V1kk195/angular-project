@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     Input,
+    OnInit,
     ViewEncapsulation,
 } from '@angular/core';
 
@@ -12,12 +13,16 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class AddEditCourseFormComponent {
+export class AddEditCourseFormComponent implements OnInit {
     @Input() type: 'add' | 'edit' = 'add';
     @Input() title = '';
     @Input() description = '';
 
-    public heading = this.type === 'add' ? 'New course' : 'Edit course';
+    public heading = '';
+
+    public ngOnInit() {
+        this.heading = this.type === 'add' ? 'New course' : 'Edit course';
+    }
 
     public onCancel(): void {
         console.log('cancelled adding course');

@@ -6,7 +6,7 @@
 
     <button
         (click)="onAddCourseClick()"
-        routerLink="/courses/new"
+        [routerLink]="addCourseLink"
         class="add-course-button"
     >
         + Add course
