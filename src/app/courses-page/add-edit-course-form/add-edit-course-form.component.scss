@@ -1,0 +1,20 @@
+@import 'mixins';
+
+.container {
+    @include form;
+
+    .form {
+        width: 730px;
+
+        > label,
+        .label {
+            margin-bottom: 12px;
+        }
+
+        .buttons {
+            display: flex;
+            align-self: flex-end;
+            column-gap: 12px;
+        }
+    }
+}
