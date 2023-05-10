@@ -2,7 +2,6 @@
     display: flex;
     justify-content: space-between;
     background-color: #303240;
-    color: #ffffff;
     height: 60px;
     align-items: center;
     padding-right: 85px;
@@ -13,6 +12,7 @@
         text-transform: uppercase;
         font-weight: 700;
         cursor: pointer;
+        color: #ffffff;
     }
 
     .buttons {

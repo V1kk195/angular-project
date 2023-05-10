@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { AuthService } from '../core/auth.service';
+import { Router } from '@angular/router';
+import { ROUTES_NAMES } from '../core/routes';
 
 @Component({
     selector: 'app-login-page',
@@ -10,9 +12,10 @@ export class LoginPageComponent {
     @Input() email = '';
     @Input() password = '';
 
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService, private router: Router) {}
 
     public onLogIn() {
         this.authService.logIn({ email: this.email, password: this.password });
+        this.router.navigateByUrl(`/${ROUTES_NAMES.courses}`);
     }
 }

@@ -5,9 +5,15 @@ import { AddCourseComponent } from './courses-page/add-course/add-course.compone
 import { EditCourseComponent } from './courses-page/edit-course/edit-course.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { ROUTES_NAMES } from './core/routes';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 const routes: Routes = [
     { path: '', redirectTo: `/${ROUTES_NAMES.courses}`, pathMatch: 'full' },
+    {
+        path: ROUTES_NAMES.login,
+        pathMatch: 'full',
+        component: LoginPageComponent,
+    },
     {
         path: ROUTES_NAMES.courses,
         component: CoursesPageComponent,
