@@ -6,6 +6,7 @@ import { EditCourseComponent } from './courses-page/edit-course/edit-course.comp
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { ROUTES_NAMES } from './core/routes';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { authGuard } from './core/auth/auth.guard';
 
 const routes: Routes = [
     { path: '', redirectTo: `/${ROUTES_NAMES.courses}`, pathMatch: 'full' },
@@ -18,13 +19,19 @@ const routes: Routes = [
         path: ROUTES_NAMES.courses,
         component: CoursesPageComponent,
         title: 'Courses',
+        canActivate: [authGuard],
     },
     {
         path: ROUTES_NAMES.addCourse,
         component: AddCourseComponent,
         title: 'Add new course',
+        canActivate: [authGuard],
     },
-    { path: `${ROUTES_NAMES.courses}/:id`, component: EditCourseComponent },
+    {
+        path: `${ROUTES_NAMES.courses}/:id`,
+        component: EditCourseComponent,
+        canActivate: [authGuard],
+    },
     { path: '**', component: NotFoundPageComponent },
 ];
 
