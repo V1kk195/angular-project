@@ -15,7 +15,11 @@ export class LoginPageComponent {
     constructor(private authService: AuthService, private router: Router) {}
 
     public onLogIn() {
-        this.authService.logIn({ email: this.email, password: this.password });
-        this.router.navigateByUrl(`/${ROUTES_NAMES.courses}`);
+        this.authService
+            .logIn({ email: this.email, password: this.password })
+            .subscribe((data) => {
+                localStorage.setItem('token', data.token);
+                this.router.navigateByUrl(`/${ROUTES_NAMES.courses}`);
+            });
     }
 }

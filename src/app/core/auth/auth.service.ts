@@ -1,15 +1,24 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { LoginRequest, LoginResponse } from '../../types';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    // constructor() {}
+    private baseUrl = 'http://localhost:3004';
+    constructor(private http: HttpClient) {}
 
-    public logIn(userInfo: { email: string; password: string }): void {
-        localStorage.setItem('user', JSON.stringify(userInfo));
-        localStorage.setItem('token', `${userInfo.email}-fake-token`);
-        console.log('logged in successfully', userInfo);
+    public logIn(userInfo: {
+        email: string;
+        password: string;
+    }): Observable<LoginResponse> {
+        return this.http.post<LoginResponse>(`${this.baseUrl}/auth/login`, {
+            login: userInfo.email,
+            password: userInfo.password,
+        } as LoginRequest);
     }
 
     public logOut(): void {

@@ -7,6 +7,7 @@ import { CoursesPageModule } from './courses-page/courses-page.module';
 import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from './layout/layout.module';
 import { LoginPageModule } from './login-page/login-page.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { LoginPageModule } from './login-page/login-page.module';
         SharedModule,
         LayoutModule,
         LoginPageModule,
+        HttpClientModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
