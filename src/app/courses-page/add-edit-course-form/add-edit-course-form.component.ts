@@ -8,7 +8,7 @@ import {
     ViewEncapsulation,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { ROUTES_NAMES } from '../../core/routes';
+import { ROUTES_NAMES } from '../../core/constants/routes';
 
 @Component({
     selector: 'app-add-edit-course-form',

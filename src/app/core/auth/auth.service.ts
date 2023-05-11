@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 
 import { CurrentUserResponse, LoginRequest, LoginResponse } from '../../types';
 import { Observable } from 'rxjs';
+import { BASE_URL } from '../constants';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    private baseUrl = 'http://localhost:3004';
+    private baseUrl = BASE_URL;
     constructor(private http: HttpClient) {}
 
     public logIn(userInfo: {

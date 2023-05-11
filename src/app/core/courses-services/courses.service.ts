@@ -1,15 +1,44 @@
 import { Injectable } from '@angular/core';
-import { Course } from '../../courses-page/course/course';
+import { HttpClient } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
+
+import { Course, CourseResponse } from '../../types/course';
 import { courses } from '../../courses-page/mock-courses';
+import { BASE_URL } from '../constants';
 
 @Injectable({
     providedIn: 'root',
 })
 export class CoursesService {
     private courses: Course[] = courses;
+    private baseUrl = BASE_URL;
 
-    public getCourses(): Course[] {
-        return this.courses;
+    constructor(private http: HttpClient) {}
+
+    public getCourses(
+        start = 0,
+        count = 5,
+        sort = 'date'
+    ): Observable<Course[]> {
+        return this.http
+            .get<CourseResponse[]>(
+                `${this.baseUrl}/courses?start=${start}&count=${count}&sort=${sort}`
+            )
+            .pipe(
+                map((data) =>
+                    data.map(
+                        (item) =>
+                            ({
+                                id: item.id.toString(),
+                                title: item.name,
+                                creationDate: new Date(item.date).getTime(),
+                                duration: item.length,
+                                description: item.description,
+                                topRated: item.isTopRated,
+                            } as Course)
+                    )
+                )
+            );
     }
 
     public createCourse(data: Course): Course {

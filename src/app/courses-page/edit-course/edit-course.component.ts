@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Course } from '../course/course';
+import { Course } from '../../types/course';
 import { courses } from '../mock-courses';
-import { ROUTES_NAMES } from '../../core/routes';
+import { ROUTES_NAMES } from '../../core/constants/routes';
 
 @Component({
     selector: 'app-edit-course',

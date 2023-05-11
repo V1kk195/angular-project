@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ROUTES_NAMES } from '../../core/routes';
+import { ROUTES_NAMES } from '../../core/constants/routes';
 
 @Component({
     selector: 'app-courses-header',

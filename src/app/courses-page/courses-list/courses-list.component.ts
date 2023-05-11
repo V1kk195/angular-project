@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Course } from '../course/course';
+import { Course } from '../../types/course';
 import { CoursesService } from '../../core/courses-services/courses.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { CoursesService } from '../../core/courses-services/courses.service';
 })
 export class CoursesListComponent implements OnInit {
     public courses: Course[] = [];
+    private nextStartPoint = 0;
 
     constructor(private coursesService: CoursesService) {}
 
@@ -16,11 +17,15 @@ export class CoursesListComponent implements OnInit {
         this.getCourses();
     }
 
-    private getCourses(): void {
-        this.courses = this.coursesService.getCourses();
+    private getCourses(start?: number): void {
+        this.coursesService.getCourses(start).subscribe((data) => {
+            this.courses = [...this.courses, ...data];
+            this.nextStartPoint = this.nextStartPoint + 5;
+        });
     }
 
     public onLoadMoreClick(): void {
+        this.getCourses(this.nextStartPoint);
         console.log('Load more courses clicked');
     }
 
