@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../core/auth.service';
+import { AuthService } from '../../core/auth/auth.service';
+import { Router } from '@angular/router';
+import { ROUTES_NAMES } from '../../core/routes';
 
 @Component({
     selector: 'app-header',
@@ -7,9 +9,10 @@ import { AuthService } from '../../core/auth.service';
     styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-    constructor(public authService: AuthService) {}
+    constructor(public authService: AuthService, private router: Router) {}
 
     public onLogOut() {
         this.authService.logOut();
+        this.router.navigateByUrl(`/${ROUTES_NAMES.login}`);
     }
 }

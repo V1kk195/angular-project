@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Course } from '../courses-page/course/course';
-import { courses } from '../courses-page/mock-courses';
+import { Course } from '../../courses-page/course/course';
+import { courses } from '../../courses-page/mock-courses';
 
 @Injectable({
     providedIn: 'root',
 })
 export class CoursesService {
     private courses: Course[] = courses;
-    // constructor() {}
 
     public getCourses(): Course[] {
         return this.courses;
