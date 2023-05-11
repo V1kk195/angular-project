@@ -1,11 +1,13 @@
 .root-container {
-    height: 100vh;
     background-color: #f5f6fa;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1 0 auto;
 
     main {
         max-width: 1110px;
-        height: calc(100vh - 84px);
         margin: 0 auto;
-        padding: 24px 0;
+        padding: 24px 0 84px 0;
     }
 }
