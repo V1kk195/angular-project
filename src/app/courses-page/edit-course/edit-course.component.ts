@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Course } from '../../types/course';
+import { Course, CourseApiModel } from '../../types/course';
 import { courses } from '../mock-courses';
-import { ROUTES_NAMES } from '../../core/constants/routes';
+import { ROUTES_NAMES } from '../../core/constants';
 
 @Component({
     selector: 'app-edit-course',
@@ -23,7 +23,7 @@ export class EditCourseComponent implements OnInit {
         }
     }
 
-    public onSave(courseInfo: string) {
+    public onSave(courseInfo: CourseApiModel) {
         console.log('info updated', courseInfo);
         this.router.navigateByUrl(`/${ROUTES_NAMES.courses}`);
     }

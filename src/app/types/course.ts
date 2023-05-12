@@ -7,15 +7,17 @@ export interface Course {
     topRated: boolean;
 }
 
-export type CourseResponse = {
+export type Author = {
     id: number;
+    name: string;
+};
+
+export type CourseApiModel = {
+    id?: number;
     name: string;
     date: string;
     length: number;
     description: string;
-    authors: {
-        id: number;
-        name: string;
-    };
+    authors: Author[];
     isTopRated: boolean;
 };

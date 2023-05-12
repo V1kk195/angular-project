@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 
-import { Course, CourseResponse } from '../../types/course';
+import { Course, CourseApiModel } from '../../types/course';
 import { courses } from '../../courses-page/mock-courses';
 import { BASE_URL } from '../constants';
 
@@ -21,7 +21,7 @@ export class CoursesService {
         sort = 'date'
     ): Observable<Course[]> {
         return this.http
-            .get<CourseResponse[]>(
+            .get<CourseApiModel[]>(
                 `${this.baseUrl}/courses?start=${start}&count=${count}&sort=${sort}`
             )
             .pipe(
@@ -29,7 +29,7 @@ export class CoursesService {
                     data.map(
                         (item) =>
                             ({
-                                id: item.id.toString(),
+                                id: item.id?.toString(),
                                 title: item.name,
                                 creationDate: new Date(item.date).getTime(),
                                 duration: item.length,
@@ -41,10 +41,11 @@ export class CoursesService {
             );
     }
 
-    public createCourse(data: Course): Course {
-        this.courses = [...this.courses, data];
-
-        return data;
+    public createCourse(data: CourseApiModel): Observable<CourseApiModel> {
+        return this.http.post<CourseApiModel>(`${this.baseUrl}/courses`, data);
+        // this.courses = [...this.courses, data];
+        //
+        // return data;
     }
 
     public getCourseById(id: string): Course | null {
