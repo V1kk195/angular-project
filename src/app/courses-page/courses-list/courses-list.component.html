@@ -12,7 +12,13 @@
             ></app-course>
         </li>
     </ul>
-    <button class="load-button" (click)="onLoadMoreClick()">Load more</button>
+    <button
+        *ngIf="!coursesEnded"
+        class="load-button"
+        (click)="onLoadMoreClick()"
+    >
+        Load more
+    </button>
 </ng-container>
 <ng-template #elseBlock>
     <div class="no-data">No data. Feel free to add new courses</div>

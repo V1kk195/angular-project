@@ -12,6 +12,7 @@ import { CoursesService } from '../../core/courses-services/courses.service';
 export class CoursesListComponent implements OnInit, OnDestroy {
     private nextStartPoint = 0;
     private subs: Subscription[] = [];
+    public coursesEnded = false;
 
     constructor(public coursesService: CoursesService) {}
 
@@ -28,6 +29,10 @@ export class CoursesListComponent implements OnInit, OnDestroy {
             .getCourses(start, count)
             .subscribe((data) => {
                 this.nextStartPoint = this.nextStartPoint + 5;
+
+                if (!data.length) {
+                    this.coursesEnded = true;
+                }
             });
 
         this.subs.push(sub);

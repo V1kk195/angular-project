@@ -33,11 +33,12 @@ export class CoursesService {
     public getCourses(
         start = 0,
         count = 5,
-        sort = 'date'
+        sort = 'date',
+        textFragment = ''
     ): Observable<Course[]> {
         return this.http
             .get<CourseApiModel[]>(
-                `${this.baseUrl}/courses?start=${start}&count=${count}&sort=${sort}`
+                `${this.baseUrl}/courses?start=${start}&count=${count}&sort=${sort}&textFragment=${textFragment}`
             )
             .pipe(
                 map(this.transformData),
@@ -46,6 +47,12 @@ export class CoursesService {
                         (this.coursesList = [...this.coursesList, ...courses])
                 )
             );
+    }
+
+    public searchCourses(textFragment: string) {
+        this.coursesList = [];
+
+        return this.getCourses(undefined, undefined, undefined, textFragment);
     }
 
     public createCourse(data: CourseApiModel): Observable<CourseApiModel> {
