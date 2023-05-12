@@ -63,7 +63,7 @@ export class CoursesService {
         return data;
     }
 
-    public deleteCourse(id: string): void {
-        this.courses = this.courses.filter((item) => item.id !== id);
+    public deleteCourse(id: string): Observable<void> {
+        return this.http.delete<void>(`${this.baseUrl}/courses/${id}`);
     }
 }

@@ -23,11 +23,13 @@ export class CoursesListComponent implements OnInit, OnDestroy {
         this.subs.forEach((item) => item.unsubscribe());
     }
 
-    private getCourses(start?: number): void {
-        const sub = this.coursesService.getCourses(start).subscribe((data) => {
-            this.courses = [...this.courses, ...data];
-            this.nextStartPoint = this.nextStartPoint + 5;
-        });
+    private getCourses(start?: number, count?: number): void {
+        const sub = this.coursesService
+            .getCourses(start, count)
+            .subscribe((data) => {
+                this.courses = [...this.courses, ...data];
+                this.nextStartPoint = this.nextStartPoint + 5;
+            });
 
         this.subs.push(sub);
     }
@@ -42,8 +44,21 @@ export class CoursesListComponent implements OnInit, OnDestroy {
         const res = confirm('Do you really want to delete this course?');
 
         if (res) {
-            this.coursesService.deleteCourse(courseId);
-            this.getCourses();
+            const sub = this.coursesService
+                .deleteCourse(courseId)
+                .subscribe(() => {
+                    this.courses = [];
+
+                    const sub = this.coursesService
+                        .getCourses(0, this.nextStartPoint)
+                        .subscribe((data) => {
+                            this.courses = [...this.courses, ...data];
+                        });
+
+                    this.subs.push(sub);
+                });
+
+            this.subs.push(sub);
         }
     }
 
