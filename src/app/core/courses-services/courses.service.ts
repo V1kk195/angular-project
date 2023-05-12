@@ -43,9 +43,6 @@ export class CoursesService {
 
     public createCourse(data: CourseApiModel): Observable<CourseApiModel> {
         return this.http.post<CourseApiModel>(`${this.baseUrl}/courses`, data);
-        // this.courses = [...this.courses, data];
-        //
-        // return data;
     }
 
     public getCourseById(id: string): Course | null {
