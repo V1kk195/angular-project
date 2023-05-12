@@ -1,19 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 
 import { Course, CourseApiModel } from '../../types/course';
-import { courses } from '../../courses-page/mock-courses';
 import { BASE_URL } from '../constants';
 
 @Injectable({
     providedIn: 'root',
 })
 export class CoursesService {
-    private courses: Course[] = courses;
     private baseUrl = BASE_URL;
+    private coursesList: Course[] = [];
+    public get courses() {
+        return this.coursesList;
+    }
 
     constructor(private http: HttpClient) {}
+
+    private transformData(data: CourseApiModel[]): Course[] {
+        return data.map(
+            (item): Course => ({
+                id: item.id?.toString() || '',
+                title: item.name,
+                creationDate: new Date(item.date).getTime(),
+                duration: item.length,
+                description: item.description,
+                topRated: item.isTopRated,
+            })
+        );
+    }
 
     public getCourses(
         start = 0,
@@ -25,18 +40,10 @@ export class CoursesService {
                 `${this.baseUrl}/courses?start=${start}&count=${count}&sort=${sort}`
             )
             .pipe(
-                map((data) =>
-                    data.map(
-                        (item) =>
-                            ({
-                                id: item.id?.toString(),
-                                title: item.name,
-                                creationDate: new Date(item.date).getTime(),
-                                duration: item.length,
-                                description: item.description,
-                                topRated: item.isTopRated,
-                            } as Course)
-                    )
+                map(this.transformData),
+                tap(
+                    (courses) =>
+                        (this.coursesList = [...this.coursesList, ...courses])
                 )
             );
     }
@@ -46,11 +53,11 @@ export class CoursesService {
     }
 
     public getCourseById(id: string): Course | null {
-        return this.courses.find((item) => item.id === id) || null;
+        return this.coursesList.find((item) => item.id === id) || null;
     }
 
     public updateCourse(data: Course): Course {
-        this.courses = this.courses.map((item) => {
+        this.coursesList = this.coursesList.map((item) => {
             if (item.id === data.id) {
                 return data;
             }
@@ -61,7 +68,13 @@ export class CoursesService {
         return data;
     }
 
-    public deleteCourse(id: string): Observable<void> {
-        return this.http.delete<void>(`${this.baseUrl}/courses/${id}`);
+    public deleteCourse(id: string, count?: number): Observable<void> {
+        return this.http.delete<void>(`${this.baseUrl}/courses/${id}`).pipe(
+            tap((data) => {
+                this.coursesList = [];
+
+                this.getCourses(0, count).subscribe();
+            })
+        );
     }
 }

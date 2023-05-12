@@ -1,6 +1,11 @@
-<ng-container *ngIf="courses?.length; else elseBlock">
+<ng-container *ngIf="coursesService.courses?.length; else elseBlock">
     <ul class="container">
-        <li *ngFor="let course of courses; trackBy: courseTrackBy">
+        <li
+            *ngFor="
+                let course of coursesService.courses;
+                trackBy: courseTrackBy
+            "
+        >
             <app-course
                 [course]="course"
                 (courseDeleted)="onDeleteCourse($event)"
