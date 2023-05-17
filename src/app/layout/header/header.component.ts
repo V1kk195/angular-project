@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../core/auth/auth.service';
 import { Router } from '@angular/router';
-import { ROUTES_NAMES } from '../../core/routes';
+import { ROUTES_NAMES } from '../../core/constants/routes';
 
 @Component({
     selector: 'app-header',
@@ -14,5 +14,9 @@ export class HeaderComponent {
     public onLogOut() {
         this.authService.logOut();
         this.router.navigateByUrl(`/${ROUTES_NAMES.login}`);
+    }
+
+    public onUserClick() {
+        this.authService.getUserInfo().subscribe((data) => console.log(data));
     }
 }

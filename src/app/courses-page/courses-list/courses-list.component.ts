@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Course } from '../course/course';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { Course } from '../../types/course';
 import { CoursesService } from '../../core/courses-services/courses.service';
 
 @Component({
@@ -7,30 +9,48 @@ import { CoursesService } from '../../core/courses-services/courses.service';
     templateUrl: './courses-list.component.html',
     styleUrls: ['./courses-list.component.scss'],
 })
-export class CoursesListComponent implements OnInit {
-    public courses: Course[] = [];
+export class CoursesListComponent implements OnInit, OnDestroy {
+    private nextStartPoint = 0;
+    private subs: Subscription[] = [];
+    public coursesEnded = false;
 
-    constructor(private coursesService: CoursesService) {}
+    constructor(public coursesService: CoursesService) {}
 
     public ngOnInit(): void {
         this.getCourses();
     }
 
-    private getCourses(): void {
-        this.courses = this.coursesService.getCourses();
+    public ngOnDestroy(): void {
+        this.subs.forEach((item) => item.unsubscribe());
+    }
+
+    private getCourses(start?: number, count?: number): void {
+        const sub = this.coursesService
+            .getCourses(start, count)
+            .subscribe((data) => {
+                this.nextStartPoint = this.nextStartPoint + 5;
+
+                if (!data.length) {
+                    this.coursesEnded = true;
+                }
+            });
+
+        this.subs.push(sub);
     }
 
     public onLoadMoreClick(): void {
-        console.log('Load more courses clicked');
+        this.getCourses(this.nextStartPoint);
     }
 
     public onDeleteCourse(courseId: string): void {
-        console.log(`Deleted course ${courseId}`);
         const res = confirm('Do you really want to delete this course?');
 
         if (res) {
-            this.coursesService.deleteCourse(courseId);
-            this.getCourses();
+            const sub = this.coursesService
+                .deleteCourse(courseId, this.nextStartPoint)
+                .subscribe();
+
+            this.subs.push(sub);
         }
     }
 

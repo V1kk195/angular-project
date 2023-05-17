@@ -2,7 +2,7 @@
     <h1 class="logo" routerLink="">video course</h1>
 
     <div class="buttons" *appIfAuthenticated="authService.isAuthenticated">
-        <button>User login</button>
+        <button (click)="onUserClick()">User</button>
         <button (click)="onLogOut()">Log out</button>
     </div>
 </header>

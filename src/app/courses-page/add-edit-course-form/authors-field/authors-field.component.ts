@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Author } from '../../../types/course';
 
 @Component({
     selector: 'app-authors-field',
@@ -7,5 +8,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthorsFieldComponent {
-    @Input() authors = '';
+    @Input() authors: Author[] = [];
 }

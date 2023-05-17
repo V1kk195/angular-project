@@ -24,9 +24,9 @@
             ></textarea>
         </label>
 
-        <app-duration-field></app-duration-field>
-        <app-date-field></app-date-field>
-        <app-authors-field></app-authors-field>
+        <app-duration-field [duration]="duration!"></app-duration-field>
+        <app-date-field [date]="date"></app-date-field>
+        <app-authors-field [authors]="authors"></app-authors-field>
 
         <div class="buttons">
             <button class="button-cancel" (click)="onCancel()">Cancel</button>

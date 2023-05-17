@@ -5,8 +5,8 @@ import {
     Input,
     Output,
 } from '@angular/core';
-import { Course } from './course';
-import { ROUTES_NAMES } from '../../core/routes';
+import { Course } from '../../types/course';
+import { ROUTES_NAMES } from '../../core/constants/routes';
 
 @Component({
     selector: 'app-course',

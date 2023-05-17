@@ -7,7 +7,7 @@ export class OrderByPipe implements PipeTransform {
     transform(
         value: Record<string, any>[] = [],
         property: string,
-        direction: 'asc' | 'desc' = 'asc'
+        direction: 'asc' | 'desc' = 'desc'
     ): any[] {
         return [...value].sort((a, b) => {
             if (direction === 'asc') {

@@ -1,15 +1,25 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { CurrentUserResponse, LoginRequest, LoginResponse } from '../../types';
+import { Observable } from 'rxjs';
+import { BASE_URL } from '../constants';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    // constructor() {}
+    private baseUrl = BASE_URL;
+    constructor(private http: HttpClient) {}
 
-    public logIn(userInfo: { email: string; password: string }): void {
-        localStorage.setItem('user', JSON.stringify(userInfo));
-        localStorage.setItem('token', `${userInfo.email}-fake-token`);
-        console.log('logged in successfully', userInfo);
+    public logIn(userInfo: {
+        email: string;
+        password: string;
+    }): Observable<LoginResponse> {
+        return this.http.post<LoginResponse>(`${this.baseUrl}/auth/login`, {
+            login: userInfo.email,
+            password: userInfo.password,
+        } as LoginRequest);
     }
 
     public logOut(): void {
@@ -22,13 +32,14 @@ export class AuthService {
         return !!localStorage.getItem('token');
     }
 
-    public getUserInfo(): string | null {
-        const user = localStorage.getItem('user');
+    public getUserInfo(): Observable<CurrentUserResponse> {
+        return this.http.post<CurrentUserResponse>(
+            `${this.baseUrl}/auth/userinfo`,
+            { token: this.getAuthorizationToken() }
+        );
+    }
 
-        if (user) {
-            return JSON.parse(user).email;
-        }
-
-        return null;
+    public getAuthorizationToken(): string {
+        return localStorage.getItem('token') || '';
     }
 }
