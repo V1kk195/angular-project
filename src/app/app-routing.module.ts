@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { CoursesPageComponent } from './courses-page/courses-page.component';
 import { AddCourseComponent } from './courses-page/add-course/add-course.component';
 import { EditCourseComponent } from './courses-page/edit-course/edit-course.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
-import { ROUTES_NAMES } from './core/constants/routes';
+import { ROUTES_NAMES } from './core/constants';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { authGuard } from './core/auth/auth.guard';
 

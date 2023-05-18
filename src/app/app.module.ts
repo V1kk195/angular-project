@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from './layout/layout.module';
 import { LoginPageModule } from './login-page/login-page.module';
 import { httpInterceptorProviders } from './core/interceptors';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
     declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { httpInterceptorProviders } from './core/interceptors';
         LayoutModule,
         LoginPageModule,
         HttpClientModule,
+        AngularSvgIconModule.forRoot(),
     ],
     providers: [httpInterceptorProviders],
     bootstrap: [AppComponent],
