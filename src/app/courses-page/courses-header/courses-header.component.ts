@@ -5,7 +5,7 @@ import { CoursesService } from '../../core/courses-services/courses.service';
 import {
     debounceTime,
     distinctUntilChanged,
-    fromEvent,
+    filter,
     map,
     Subject,
     switchMap,
@@ -19,7 +19,7 @@ import {
 })
 export class CoursesHeaderComponent implements OnInit {
     public addCourseLink = `/${ROUTES_NAMES.addCourse}`;
-    private subject$ = new Subject();
+    private subject$: Subject<Event> = new Subject();
 
     constructor(private coursesService: CoursesService) {}
 
@@ -28,21 +28,40 @@ export class CoursesHeaderComponent implements OnInit {
     }
 
     private handleSearch() {
-        const input = document.getElementById('searchInput')!;
+        // const input = document.getElementById('searchInput')!;
+        //
+        // fromEvent(input, 'keyup')
+        //     .pipe(
+        //         map((e) => (e?.target as HTMLInputElement).value),
+        //         debounceTime(500),
+        //         distinctUntilChanged(),
+        //         throttleTime(250),
+        //         switchMap((search) => this.coursesService.searchCourses(search))
+        //     )
+        //     .subscribe((data) => this.subject$.next(data));
+        //
+        // this.subject$.subscribe((data) => {
+        //     console.log(data);
+        // });
 
-        fromEvent(input, 'keyup')
+        this.subject$
             .pipe(
                 map((e) => (e?.target as HTMLInputElement).value),
-                debounceTime(500),
+                filter((value) => value === '' || value.length > 2),
                 distinctUntilChanged(),
+                debounceTime(250),
                 throttleTime(250),
-                switchMap((search) => this.coursesService.searchCourses(search))
+                switchMap((searchString: string) =>
+                    this.coursesService.searchCourses(searchString)
+                )
             )
-            .subscribe((data) => this.subject$.next(data));
+            .subscribe((data) => {
+                console.log(data);
+            });
+    }
 
-        this.subject$.subscribe((data) => {
-            console.log(data);
-        });
+    public onSearchInputChange(event: Event): void {
+        this.subject$.next(event);
     }
 
     public onAddCourseClick(): void {
