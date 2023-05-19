@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ROUTES_NAMES } from '../../core/constants';
 import { CoursesService } from '../../core/courses-services/courses.service';
@@ -11,20 +11,29 @@ import {
     switchMap,
     throttleTime,
 } from 'rxjs';
+import { LoaderService } from '../../shared/loader/service/loader.service';
 
 @Component({
     selector: 'app-courses-header',
     templateUrl: './courses-header.component.html',
     styleUrls: ['./courses-header.component.scss'],
 })
-export class CoursesHeaderComponent implements OnInit {
+export class CoursesHeaderComponent implements OnInit, OnDestroy {
     public addCourseLink = `/${ROUTES_NAMES.addCourse}`;
     private subject$: Subject<Event> = new Subject();
+    private componentIsDestroyed = false;
 
-    constructor(private coursesService: CoursesService) {}
+    constructor(
+        private coursesService: CoursesService,
+        private loaderService: LoaderService
+    ) {}
 
     public ngOnInit() {
         this.handleSearch();
+    }
+
+    public ngOnDestroy() {
+        this.componentIsDestroyed = true;
     }
 
     private handleSearch() {
@@ -57,10 +66,12 @@ export class CoursesHeaderComponent implements OnInit {
             )
             .subscribe((data) => {
                 console.log(data);
+                this.loaderService.setIsLoading(false);
             });
     }
 
     public onSearchInputChange(event: Event): void {
+        this.loaderService.setIsLoading(true);
         this.subject$.next(event);
     }
 

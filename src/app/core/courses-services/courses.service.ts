@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, tap } from 'rxjs';
+import { delay, map, Observable, tap } from 'rxjs';
 
 import { Course, CourseApiModel } from '../../types/course';
 import { BASE_URL } from '../constants';
@@ -41,6 +41,7 @@ export class CoursesService {
                 `${this.baseUrl}/courses?start=${start}&count=${count}&sort=${sort}&textFragment=${textFragment}`
             )
             .pipe(
+                delay(2000),
                 map(this.transformData),
                 tap(
                     (courses) =>
