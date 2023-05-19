@@ -22,7 +22,7 @@ export class CoursesService {
             (item): Course => ({
                 id: item.id?.toString() || '',
                 title: item.name,
-                creationDate: new Date(item.date).getTime(),
+                creationDate: item.date,
                 duration: item.length,
                 description: item.description,
                 topRated: item.isTopRated,
@@ -60,8 +60,10 @@ export class CoursesService {
         return this.http.post<CourseApiModel>(`${this.baseUrl}/courses`, data);
     }
 
-    public getCourseById(id: string): Course | null {
-        return this.coursesList.find((item) => item.id === id) || null;
+    public getCourseById(id: string): Observable<Course> {
+        return this.http
+            .get<CourseApiModel>(`${this.baseUrl}/courses/${id}`)
+            .pipe(map((course) => this.transformData([course])[0]));
     }
 
     public updateCourse(data: Course): Course {
