@@ -37,13 +37,20 @@
 
     .row {
         display: flex;
-        gap: 12px;
+        gap: 24px;
+        justify-content: space-between;
+
+        &:first-child {
+            width: 60%;
+        }
 
         .buttons {
-            width: 30%;
+            display: flex;
+            gap: 12px;
 
-            > button:first-of-type {
-                margin-right: 12px;
+            > button {
+                height: 24px;
+                min-width: 60px;
             }
         }
     }

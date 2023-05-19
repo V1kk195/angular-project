@@ -43,10 +43,7 @@ export class CoursesService {
             .pipe(
                 delay(2000),
                 map(this.transformData),
-                tap(
-                    (courses) =>
-                        (this.coursesList = [...this.coursesList, ...courses])
-                )
+                tap((courses) => (this.coursesList = courses))
             );
     }
 

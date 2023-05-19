@@ -11,7 +11,7 @@ import { LoaderService } from '../../shared/loader/service/loader.service';
     styleUrls: ['./courses-list.component.scss'],
 })
 export class CoursesListComponent implements OnInit, OnDestroy {
-    private nextStartPoint = 0;
+    private nextStartPoint = 5;
     private subs: Subscription[] = [];
     public coursesEnded = false;
 
@@ -47,7 +47,7 @@ export class CoursesListComponent implements OnInit, OnDestroy {
     }
 
     public onLoadMoreClick(): void {
-        this.getCourses(this.nextStartPoint);
+        this.getCourses(0, this.nextStartPoint);
     }
 
     public onDeleteCourse(courseId: string): void {
