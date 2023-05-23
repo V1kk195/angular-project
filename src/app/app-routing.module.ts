@@ -8,6 +8,7 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
 import { ROUTES_NAMES } from './core/constants';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { authGuard } from './core/auth/auth.guard';
+import { CoursesListComponent } from './courses-page/courses-list/courses-list.component';
 
 const routes: Routes = [
     { path: '', redirectTo: `/${ROUTES_NAMES.courses}`, pathMatch: 'full' },
@@ -21,18 +22,47 @@ const routes: Routes = [
         component: CoursesPageComponent,
         title: 'Courses',
         canActivate: [authGuard],
+        data: {
+            breadcrumbs: {
+                caption: 'Courses',
+                level: 1,
+            },
+        },
+        children: [
+            {
+                path: '',
+                component: CoursesListComponent,
+
+                data: {
+                    breadcrumbs: null,
+                },
+            },
+            {
+                path: `new`,
+                component: AddCourseComponent,
+                title: 'Add new course',
+                canActivate: [authGuard],
+                data: {
+                    breadcrumbs: {
+                        caption: 'New Course',
+                        level: 2,
+                    },
+                },
+            },
+            {
+                path: `:id`,
+                component: EditCourseComponent,
+                canActivate: [authGuard],
+                data: {
+                    breadcrumbs: {
+                        caption: 'Course Name',
+                        level: 2,
+                    },
+                },
+            },
+        ],
     },
-    {
-        path: ROUTES_NAMES.addCourse,
-        component: AddCourseComponent,
-        title: 'Add new course',
-        canActivate: [authGuard],
-    },
-    {
-        path: `${ROUTES_NAMES.courses}/:id`,
-        component: EditCourseComponent,
-        canActivate: [authGuard],
-    },
+
     { path: '**', component: NotFoundPageComponent },
 ];
 
