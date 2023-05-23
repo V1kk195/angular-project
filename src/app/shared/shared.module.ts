@@ -10,6 +10,7 @@ import { FilterPipe } from './pipes/filter-list/filter.pipe';
 import { IfAuthenticatedDirective } from './ifAuthenticated/if-authenticated.directive';
 import { LoaderComponent } from './loader/loader.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { RouterLink } from '@angular/router';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
         IfAuthenticatedDirective,
         LoaderComponent,
     ],
-    imports: [CommonModule, FormsModule, AngularSvgIconModule],
+    imports: [CommonModule, FormsModule, AngularSvgIconModule, RouterLink],
     exports: [
         CommonModule,
         FormsModule,

@@ -32,7 +32,7 @@ const routes: Routes = [
             {
                 path: '',
                 component: CoursesListComponent,
-
+                pathMatch: 'full',
                 data: {
                     breadcrumbs: null,
                 },
@@ -55,7 +55,7 @@ const routes: Routes = [
                 canActivate: [authGuard],
                 data: {
                     breadcrumbs: {
-                        caption: 'Course Name',
+                        caption: 'Edit Course',
                         level: 2,
                     },
                 },

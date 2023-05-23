@@ -11,6 +11,12 @@
         > span {
             color: #464a5a;
             font-weight: 700;
+            cursor: pointer;
+        }
+
+        .arrow {
+            display: inline-block;
+            margin: 0 5px;
         }
     }
 }

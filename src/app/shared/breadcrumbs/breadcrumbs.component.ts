@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, Observable } from 'rxjs';
 
-type BreadcrumbsItems = string[];
+type BreadcrumbsItems = { caption: string; url: string }[];
 
 @Component({
     selector: 'app-breadcrumbs',
@@ -27,23 +27,34 @@ export class BreadcrumbsComponent implements OnInit {
 
     private createBreadcrumb(
         route: ActivatedRoute,
+        url = '',
         breadcrumbs: BreadcrumbsItems = []
     ): BreadcrumbsItems {
-        const children = route.children;
+        const child = route.firstChild;
 
-        console.log('children', children);
+        console.log('children', child);
 
-        if (children.length === 0) {
+        if (!child) {
             return breadcrumbs;
+        } else {
+            const breadcrumbData = child.snapshot.data?.['breadcrumbs'];
+
+            const routeURL: string = child.snapshot.url
+                .map((segment) => segment.path)
+                .join('/');
+
+            if (routeURL) {
+                url += `/${routeURL}`;
+            }
+
+            if (breadcrumbData) {
+                breadcrumbs.push({
+                    caption: breadcrumbData?.caption,
+                    url,
+                });
+            }
+
+            return this.createBreadcrumb(child, url, breadcrumbs);
         }
-
-        const child = children[0];
-        const breadcrumbData = child.snapshot.data?.['breadcrumbs'];
-
-        if (breadcrumbData) {
-            breadcrumbs.push(breadcrumbData?.caption);
-        }
-
-        return this.createBreadcrumb(child, breadcrumbs);
     }
 }
