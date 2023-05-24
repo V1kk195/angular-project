@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 
 import { Course } from '../../types/course';
 import { CoursesService } from '../../core/courses-services/courses.service';
+import { LoaderService } from '../../shared/loader/service/loader.service';
 
 @Component({
     selector: 'app-courses-list',
@@ -10,13 +11,17 @@ import { CoursesService } from '../../core/courses-services/courses.service';
     styleUrls: ['./courses-list.component.scss'],
 })
 export class CoursesListComponent implements OnInit, OnDestroy {
-    private nextStartPoint = 0;
+    private nextStartPoint = 5;
     private subs: Subscription[] = [];
     public coursesEnded = false;
 
-    constructor(public coursesService: CoursesService) {}
+    constructor(
+        public coursesService: CoursesService,
+        public loaderService: LoaderService
+    ) {}
 
     public ngOnInit(): void {
+        this.loaderService.setIsLoading(true);
         this.getCourses();
     }
 
@@ -25,8 +30,11 @@ export class CoursesListComponent implements OnInit, OnDestroy {
     }
 
     private getCourses(start?: number, count?: number): void {
+        this.loaderService.setIsLoading(true);
+
         const sub = this.coursesService
             .getCourses(start, count)
+            .pipe(finalize(() => this.loaderService.setIsLoading(false)))
             .subscribe((data) => {
                 this.nextStartPoint = this.nextStartPoint + 5;
 
@@ -39,7 +47,7 @@ export class CoursesListComponent implements OnInit, OnDestroy {
     }
 
     public onLoadMoreClick(): void {
-        this.getCourses(this.nextStartPoint);
+        this.getCourses(0, this.nextStartPoint);
     }
 
     public onDeleteCourse(courseId: string): void {

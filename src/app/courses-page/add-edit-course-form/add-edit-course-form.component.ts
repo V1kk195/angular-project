@@ -10,6 +10,7 @@ import {
 import { Router } from '@angular/router';
 import { ROUTES_NAMES } from '../../core/constants';
 import { Author, CourseApiModel } from '../../types/course';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'app-add-edit-course-form',
@@ -23,12 +24,18 @@ export class AddEditCourseFormComponent implements OnInit {
     @Input() title = '';
     @Input() description = '';
     @Input() duration = 0;
-    @Input() date = new Date().toISOString();
+    @Input() set date(value: string) {
+        this.dateFormatted = new DatePipe('en-US').transform(
+            new Date(value).toISOString(),
+            'yyyy-MM-dd'
+        )!;
+    }
     @Input() authors: Author[] = [];
 
     @Output() saveEvent = new EventEmitter<CourseApiModel>();
 
     public heading = '';
+    public dateFormatted = '';
 
     constructor(private router: Router) {}
 
@@ -47,7 +54,7 @@ export class AddEditCourseFormComponent implements OnInit {
             description: this.description,
             authors: this.authors,
             isTopRated: false,
-            date: this.date,
+            date: this.dateFormatted,
             length: this.duration,
         };
         console.log('added course', courseData);

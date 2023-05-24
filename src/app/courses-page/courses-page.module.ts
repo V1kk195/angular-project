@@ -8,7 +8,7 @@ import { CourseBorderDirective } from './course/course-border.directive';
 import { SharedModule } from '../shared/shared.module';
 import { AddCourseComponent } from './add-course/add-course.component';
 
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { EditCourseComponent } from './edit-course/edit-course.component';
 import { AddEditCourseFormComponent } from './add-edit-course-form/add-edit-course-form.component';
 import { DurationFieldComponent } from './add-edit-course-form/duration-field/duration-field.component';
@@ -29,7 +29,7 @@ import { DateFieldComponent } from './add-edit-course-form/date-field/date-field
         EditCourseComponent,
         AddEditCourseFormComponent,
     ],
-    imports: [SharedModule, RouterLink],
-    exports: [CoursesPageComponent],
+    imports: [SharedModule, RouterLink, RouterOutlet],
+    exports: [CoursesPageComponent, CoursesListComponent],
 })
 export class CoursesPageModule {}

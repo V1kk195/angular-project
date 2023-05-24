@@ -1,4 +1,10 @@
-<ng-container *ngIf="coursesService.courses?.length; else elseBlock">
+<app-courses-header></app-courses-header>
+<ng-container
+    *ngIf="
+        loaderService.isLoading || coursesService.courses.length > 0;
+        else elseBlock
+    "
+>
     <ul class="container">
         <li
             *ngFor="

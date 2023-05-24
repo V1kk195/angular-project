@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { Course, CourseApiModel } from '../../types/course';
-import { courses } from '../mock-courses';
 import { ROUTES_NAMES } from '../../core/constants';
+import { CoursesService } from '../../core/courses-services/courses.service';
 
 @Component({
     selector: 'app-edit-course',
@@ -13,13 +14,21 @@ export class EditCourseComponent implements OnInit {
     private courseId?: string;
     public courseInfo?: Course;
 
-    constructor(private route: ActivatedRoute, private router: Router) {}
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private coursesService: CoursesService
+    ) {}
 
     public ngOnInit() {
         this.courseId = this.route.snapshot.paramMap.get('id') || '';
 
         if (this.courseId) {
-            this.courseInfo = courses.find((item) => item.id === this.courseId);
+            this.coursesService
+                .getCourseById(this.courseId)
+                .subscribe((course) => {
+                    this.courseInfo = course;
+                });
         }
     }
 

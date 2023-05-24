@@ -1,7 +1,10 @@
 <div class="container">
     <div class="search">
-        <input [(ngModel)]="searchValue" placeholder="Type to search" />
-        <button (click)="onSearch()" class="search-button">Search</button>
+        <input
+            id="searchInput"
+            placeholder="Type to search"
+            (keyup)="onSearchInputChange($event)"
+        />
     </div>
 
     <button
