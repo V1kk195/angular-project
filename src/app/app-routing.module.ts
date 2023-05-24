@@ -9,6 +9,7 @@ import { ROUTES_NAMES } from './core/constants';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { authGuard } from './core/auth/auth.guard';
 import { CoursesListComponent } from './courses-page/courses-list/courses-list.component';
+import { courseInfoResolver } from './courses-page/course/resolver/course.resolver';
 
 const routes: Routes = [
     { path: '', redirectTo: `/${ROUTES_NAMES.courses}`, pathMatch: 'full' },
@@ -25,7 +26,6 @@ const routes: Routes = [
         data: {
             breadcrumbs: {
                 caption: 'Courses',
-                level: 1,
             },
         },
         children: [
@@ -45,7 +45,6 @@ const routes: Routes = [
                 data: {
                     breadcrumbs: {
                         caption: 'New Course',
-                        level: 2,
                     },
                 },
             },
@@ -56,8 +55,10 @@ const routes: Routes = [
                 data: {
                     breadcrumbs: {
                         caption: 'Edit Course',
-                        level: 2,
                     },
+                },
+                resolve: {
+                    course: courseInfoResolver,
                 },
             },
         ],
