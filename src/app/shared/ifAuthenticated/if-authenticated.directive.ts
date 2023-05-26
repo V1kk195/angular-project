@@ -1,26 +1,24 @@
 import {
     Directive,
-    Input,
     OnInit,
     TemplateRef,
     ViewContainerRef,
 } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { selectUser } from '../../state/auth/auth.selectors';
+import { take } from 'rxjs';
 
 @Directive({
     selector: '[appIfAuthenticated]',
 })
 export class IfAuthenticatedDirective implements OnInit {
     private hasView = false;
-    private isAuth = false;
-
-    @Input() set appIfAuthenticated(condition: boolean) {
-        this.isAuth = condition;
-        this.displayTemplate();
-    }
+    private isAuth = this.store.select(selectUser).pipe(take(1)).subscribe();
 
     constructor(
         private templateRef: TemplateRef<any>,
-        private viewContainer: ViewContainerRef
+        private viewContainer: ViewContainerRef,
+        private store: Store
     ) {}
 
     public ngOnInit() {

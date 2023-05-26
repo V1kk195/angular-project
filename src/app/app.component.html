@@ -1,8 +1,6 @@
 <div class="root-container">
     <app-header></app-header>
-    <app-breadcrumbs
-        *appIfAuthenticated="authService.isAuthenticated"
-    ></app-breadcrumbs>
+    <app-breadcrumbs *appIfAuthenticated></app-breadcrumbs>
     <main>
         <router-outlet></router-outlet>
     </main>

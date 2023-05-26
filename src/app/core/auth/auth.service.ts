@@ -27,10 +27,10 @@ export class AuthService {
         return !!localStorage.getItem('token');
     }
 
-    public getUserInfo(): Observable<CurrentUserResponse> {
+    public getUserInfo(token: string): Observable<CurrentUserResponse> {
         return this.http.post<CurrentUserResponse>(
             `${this.baseUrl}/auth/userinfo`,
-            { token: this.getAuthorizationToken() }
+            { token }
         );
     }
 

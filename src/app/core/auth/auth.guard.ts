@@ -5,17 +5,19 @@ import {
     Router,
     RouterStateSnapshot,
 } from '@angular/router';
-import { AuthService } from './auth.service';
+import { Store } from '@ngrx/store';
+
 import { ROUTES_NAMES } from '../constants';
+import { selectUser } from '../../state/auth/auth.selectors';
 
 export const authGuard: CanActivateFn = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
 ) => {
-    const authService = inject(AuthService);
     const router = inject(Router);
+    const store = inject(Store);
 
-    if (authService.isAuthenticated) {
+    if (store.select(selectUser)) {
         return true;
     }
 
