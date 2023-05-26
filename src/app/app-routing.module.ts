@@ -11,6 +11,7 @@ import { authGuard } from './core/auth/auth.guard';
 import { CoursesListComponent } from './courses-page/courses-list/courses-list.component';
 import { courseInfoResolver } from './courses-page/course/resolver/course.resolver';
 
+
 const routes: Routes = [
     { path: '', redirectTo: `/${ROUTES_NAMES.courses}`, pathMatch: 'full' },
     {
@@ -60,6 +61,7 @@ const routes: Routes = [
                 resolve: {
                     course: courseInfoResolver,
                 },
+
             },
         ],
     },
