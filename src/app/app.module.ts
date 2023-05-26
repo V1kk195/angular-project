@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -10,6 +10,9 @@ import { LayoutModule } from './layout/layout.module';
 import { LoginPageModule } from './login-page/login-page.module';
 import { httpInterceptorProviders } from './core/interceptors';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { authReducer } from './state/auth/auth.reducer';
 
 @NgModule({
     declarations: [AppComponent],
@@ -22,6 +25,8 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
         LoginPageModule,
         HttpClientModule,
         AngularSvgIconModule.forRoot(),
+        StoreModule.forRoot({ auth: authReducer }),
+        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     ],
     providers: [httpInterceptorProviders],
     bootstrap: [AppComponent],

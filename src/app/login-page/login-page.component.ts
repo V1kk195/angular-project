@@ -16,7 +16,7 @@ export class LoginPageComponent {
 
     public onLogIn() {
         this.authService
-            .logIn({ email: this.email, password: this.password })
+            .logIn({ login: this.email, password: this.password })
             .subscribe((data) => {
                 localStorage.setItem('token', data.token);
                 this.router.navigateByUrl(`/${ROUTES_NAMES.courses}`);

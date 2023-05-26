@@ -12,13 +12,10 @@ export class AuthService {
     private baseUrl = BASE_URL;
     constructor(private http: HttpClient) {}
 
-    public logIn(userInfo: {
-        email: string;
-        password: string;
-    }): Observable<LoginResponse> {
+    public logIn({ login, password }: LoginRequest): Observable<LoginResponse> {
         return this.http.post<LoginResponse>(`${this.baseUrl}/auth/login`, {
-            login: userInfo.email,
-            password: userInfo.password,
+            login,
+            password,
         } as LoginRequest);
     }
 
