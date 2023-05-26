@@ -32,12 +32,11 @@ export class BreadcrumbsComponent implements OnInit {
     ): BreadcrumbsItems {
         const child = route.firstChild;
 
-        console.log('children', child);
-
         if (!child) {
             return breadcrumbs;
         } else {
             const breadcrumbData = child.snapshot.data?.['breadcrumbs'];
+            const courseData = child.snapshot.data?.['course'];
 
             const routeURL: string = child.snapshot.url
                 .map((segment) => segment.path)
@@ -49,7 +48,9 @@ export class BreadcrumbsComponent implements OnInit {
 
             if (breadcrumbData) {
                 breadcrumbs.push({
-                    caption: breadcrumbData?.caption,
+                    caption: courseData
+                        ? courseData?.title
+                        : breadcrumbData?.caption,
                     url,
                 });
             }
