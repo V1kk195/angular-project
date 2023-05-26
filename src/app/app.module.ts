@@ -15,6 +15,7 @@ import { LoginPageModule } from './login-page/login-page.module';
 import { httpInterceptorProviders } from './core/interceptors';
 import { AuthEffects } from './state/auth/auth.effects';
 import { rootReducer } from './state';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
     declarations: [AppComponent],
@@ -28,10 +29,14 @@ import { rootReducer } from './state';
         HttpClientModule,
         AngularSvgIconModule.forRoot(),
         StoreModule.forRoot(rootReducer),
-        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
         EffectsModule.forRoot([AuthEffects]),
+        StoreDevtoolsModule.instrument({
+            maxAge: 25,
+            logOnly: !isDevMode(),
+            trace: true,
+        }),
     ],
-    providers: [httpInterceptorProviders],
+    providers: [httpInterceptorProviders, CookieService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

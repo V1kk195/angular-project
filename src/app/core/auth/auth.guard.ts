@@ -16,8 +16,13 @@ export const authGuard: CanActivateFn = (
 ) => {
     const router = inject(Router);
     const store = inject(Store);
+    let user = null;
 
-    if (store.select(selectUser)) {
+    store.select(selectUser).subscribe((data) => {
+        user = !!data;
+    });
+
+    if (user) {
         return true;
     }
 

@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import {
+    Actions,
+    createEffect,
+    ofType,
+    ROOT_EFFECTS_INIT,
+} from '@ngrx/effects';
 import { AuthService } from '../../core/auth/auth.service';
 import { catchError, exhaustMap, map, mergeMap, of, tap } from 'rxjs';
 import { AuthActions } from '.';
 import { CurrentUserResponse, User } from '../../types';
 import { Router } from '@angular/router';
 import { ROUTES_NAMES } from '../../core/constants';
+import { CookieService } from 'ngx-cookie-service';
 
 const setTokenCookie = (token: string): void => {
     document.cookie = `token=${token}`;
@@ -29,8 +35,8 @@ export class AuthEffects {
                     tap(({ token }) => {
                         setTokenCookie(token);
                     }),
-                    mergeMap(({ token }) =>
-                        this.authService.getUserInfo(token).pipe(
+                    mergeMap(() =>
+                        this.authService.getUserInfo().pipe(
                             map((userInfo) =>
                                 AuthActions.authSuccess({
                                     user: mapUserInfo(userInfo),
@@ -56,9 +62,39 @@ export class AuthEffects {
         { dispatch: false }
     );
 
+    logout$ = createEffect(
+        () => {
+            return this.actions$.pipe(
+                ofType(AuthActions.logout),
+                tap(() => {
+                    this.cookieService.delete('token');
+                    this.router.navigateByUrl(`/${ROUTES_NAMES.login}`);
+                })
+            );
+        },
+        { dispatch: false }
+    );
+
+    init$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(ROOT_EFFECTS_INIT),
+            mergeMap(() => {
+                return this.authService.getUserInfo().pipe(
+                    map((userInfo) =>
+                        AuthActions.authSuccess({
+                            user: mapUserInfo(userInfo),
+                        })
+                    ),
+                    catchError((err) => of(AuthActions.authFailure(err)))
+                );
+            })
+        );
+    });
+
     constructor(
         private actions$: Actions,
         private authService: AuthService,
-        private router: Router
+        private router: Router,
+        private cookieService: CookieService
     ) {}
 }

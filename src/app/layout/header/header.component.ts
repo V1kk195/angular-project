@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ROUTES_NAMES } from '../../core/constants';
 import { Store } from '@ngrx/store';
 import { selectUser } from '../../state/auth/auth.selectors';
+import { AuthActions } from 'src/app/state/auth';
 
 @Component({
     selector: 'app-header',
@@ -20,7 +21,8 @@ export class HeaderComponent {
     ) {}
 
     public onLogOut() {
-        this.authService.logOut();
-        this.router.navigateByUrl(`/${ROUTES_NAMES.login}`);
+        // this.authService.logOut();
+        // this.router.navigateByUrl(`/${ROUTES_NAMES.login}`);
+        this.store.dispatch(AuthActions.logout());
     }
 }

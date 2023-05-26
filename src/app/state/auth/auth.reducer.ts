@@ -2,8 +2,6 @@ import { createReducer, on } from '@ngrx/store';
 import * as AuthActions from './auth.actions';
 import { User } from 'src/app/types';
 
-export const authFeatureKey = 'auth';
-
 export interface AuthState {
     user: User | null;
 }
@@ -17,5 +15,6 @@ export const authReducer = createReducer(
     on(
         AuthActions.authSuccess,
         (state, { user }): AuthState => ({ ...state, user })
-    )
+    ),
+    on(AuthActions.logout, (state): AuthState => ({ ...state, user: null }))
 );

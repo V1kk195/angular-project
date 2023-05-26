@@ -4,7 +4,7 @@ import {
     TemplateRef,
     ViewContainerRef,
 } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { selectUser } from '../../state/auth/auth.selectors';
 import { take } from 'rxjs';
 
@@ -13,7 +13,8 @@ import { take } from 'rxjs';
 })
 export class IfAuthenticatedDirective implements OnInit {
     private hasView = false;
-    private isAuth = this.store.select(selectUser).pipe(take(1)).subscribe();
+    private isAuth = false;
+    private user$ = this.store.select(selectUser);
 
     constructor(
         private templateRef: TemplateRef<any>,
@@ -22,7 +23,10 @@ export class IfAuthenticatedDirective implements OnInit {
     ) {}
 
     public ngOnInit() {
-        this.displayTemplate();
+        this.user$.subscribe((user) => {
+            this.isAuth = !!user;
+            this.displayTemplate();
+        });
     }
 
     private displayTemplate() {
