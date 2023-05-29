@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map, mergeMap, of, tap } from 'rxjs';
+import { catchError, exhaustMap, map, of, tap } from 'rxjs';
+
 import { CoursesActions } from '.';
 import { CoursesService } from '../../core/courses-services/courses.service';
 import { LoaderService } from '../../shared/loader/service/loader.service';
-import { ROUTES_NAMES } from '../../core/constants';
 
 @Injectable()
 export class CoursesEffects {
@@ -12,8 +12,8 @@ export class CoursesEffects {
         return this.actions$.pipe(
             ofType(CoursesActions.loadCourses),
             tap(() => this.loaderService.setIsLoading(true)),
-            exhaustMap((action) =>
-                this.coursesService.getCourses().pipe(
+            exhaustMap(({ start, count }) =>
+                this.coursesService.getCourses(start, count).pipe(
                     map((data) =>
                         CoursesActions.loadCoursesSuccess({ data: data })
                     ),

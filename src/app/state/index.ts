@@ -1,12 +1,16 @@
-import { authReducer, AuthState } from './auth/auth.reducer';
-import { coursesReducer, CoursesState } from './courses/courses.reducer';
+import { authFeatureKey, authReducer, AuthState } from './auth/auth.reducer';
+import {
+    coursesFeatureKey,
+    coursesReducer,
+    CoursesState,
+} from './courses/courses.reducer';
 
 export interface AppState {
-    auth: AuthState;
-    courses: CoursesState;
+    [authFeatureKey]: AuthState;
+    [coursesFeatureKey]: CoursesState;
 }
 
 export const rootReducer = {
-    auth: authReducer,
-    courses: coursesReducer,
+    [authFeatureKey]: authReducer,
+    [coursesFeatureKey]: coursesReducer,
 };
