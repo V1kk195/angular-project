@@ -5,6 +5,7 @@ import { catchError, exhaustMap, map, mergeMap, of, tap } from 'rxjs';
 import { CoursesActions } from '.';
 import { CoursesService } from '../../core/courses-services/courses.service';
 import { LoaderService } from '../../shared/loader/service/loader.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable()
 export class CoursesEffects {
@@ -12,16 +13,22 @@ export class CoursesEffects {
         return this.actions$.pipe(
             ofType(CoursesActions.loadCourses),
             tap(() => this.loaderService.setIsLoading(true)),
-            exhaustMap(({ start, count }) =>
-                this.coursesService.getCourses(start, count).pipe(
-                    map((data) =>
-                        CoursesActions.loadCoursesSuccess({ data: data })
-                    ),
-                    catchError((err) =>
-                        of(CoursesActions.loadCoursesFailure(err))
-                    )
-                )
-            )
+            exhaustMap(({ start, count }) => {
+                const searchValue =
+                    this.route.snapshot.queryParamMap.get('search') || '';
+                console.log('search', searchValue);
+
+                return this.coursesService
+                    .getCourses(start, count, 'date', searchValue)
+                    .pipe(
+                        map((data) =>
+                            CoursesActions.loadCoursesSuccess({ data: data })
+                        ),
+                        catchError((err) =>
+                            of(CoursesActions.loadCoursesFailure(err))
+                        )
+                    );
+            })
         );
     });
 
@@ -58,6 +65,7 @@ export class CoursesEffects {
     constructor(
         private actions$: Actions,
         private coursesService: CoursesService,
-        private loaderService: LoaderService
+        private loaderService: LoaderService,
+        private route: ActivatedRoute
     ) {}
 }

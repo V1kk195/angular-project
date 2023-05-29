@@ -1,17 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-
-import { ROUTES_NAMES } from '../../core/constants';
-import { CoursesService } from '../../core/courses-services/courses.service';
 import {
     debounceTime,
     distinctUntilChanged,
     filter,
     map,
     Subject,
-    switchMap,
-    throttleTime,
+    tap,
 } from 'rxjs';
-import { LoaderService } from '../../shared/loader/service/loader.service';
+import { Store } from '@ngrx/store';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { ROUTES_NAMES } from '../../core/constants';
+import { CoursesService } from '../../core/courses-services/courses.service';
+import { CoursesActions } from 'src/app/state/courses';
 
 @Component({
     selector: 'app-courses-header',
@@ -25,7 +26,9 @@ export class CoursesHeaderComponent implements OnInit, OnDestroy {
 
     constructor(
         private coursesService: CoursesService,
-        private loaderService: LoaderService
+        private store: Store,
+        private route: ActivatedRoute,
+        private router: Router
     ) {}
 
     public ngOnInit() {
@@ -36,7 +39,7 @@ export class CoursesHeaderComponent implements OnInit, OnDestroy {
         this.componentIsDestroyed = true;
     }
 
-    private handleSearch() {
+    private handleSearch(): void {
         // const input = document.getElementById('searchInput')!;
         //
         // fromEvent(input, 'keyup')
@@ -57,21 +60,27 @@ export class CoursesHeaderComponent implements OnInit, OnDestroy {
             .pipe(
                 map((e) => (e?.target as HTMLInputElement).value),
                 filter((value) => value === '' || value.length > 2),
+                tap((data) => this.updateUrl(data)),
                 distinctUntilChanged(),
-                debounceTime(250),
-                throttleTime(250),
-                switchMap((searchString: string) =>
-                    this.coursesService.searchCourses(searchString)
-                )
+                debounceTime(250)
             )
             .subscribe((data) => {
-                console.log(data);
-                this.loaderService.setIsLoading(false);
+                this.store.dispatch(CoursesActions.loadCourses({}));
             });
     }
 
+    public updateUrl(searchValue: string): void {
+        this.router.navigate([], {
+            relativeTo: this.route,
+            queryParams: {
+                search: searchValue,
+            },
+            queryParamsHandling: 'merge',
+            replaceUrl: false,
+        });
+    }
+
     public onSearchInputChange(event: Event): void {
-        this.loaderService.setIsLoading(true);
         this.subject$.next(event);
     }
 

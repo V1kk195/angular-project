@@ -47,12 +47,6 @@ export class CoursesService {
             );
     }
 
-    public searchCourses(textFragment: string) {
-        this.coursesList = [];
-
-        return this.getCourses(undefined, undefined, undefined, textFragment);
-    }
-
     public createCourse(data: CourseApiModel): Observable<CourseApiModel> {
         return this.http.post<CourseApiModel>(`${this.baseUrl}/courses`, data);
     }
