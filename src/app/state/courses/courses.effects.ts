@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map, of, tap } from 'rxjs';
+import { catchError, exhaustMap, map, mergeMap, of, tap } from 'rxjs';
 
 import { CoursesActions } from '.';
 import { CoursesService } from '../../core/courses-services/courses.service';
@@ -36,6 +36,24 @@ export class CoursesEffects {
         },
         { dispatch: false }
     );
+
+    deleteCourse$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(CoursesActions.deleteCourse),
+            tap(() => this.loaderService.setIsLoading(true)),
+            exhaustMap(({ id, count }) =>
+                this.coursesService.deleteCourse(id).pipe(
+                    mergeMap(() => [
+                        CoursesActions.deleteCourseSuccess,
+                        CoursesActions.loadCourses({ start: 0, count }),
+                    ]),
+                    catchError((err) =>
+                        of(CoursesActions.deleteCourseFailure(err))
+                    )
+                )
+            )
+        );
+    });
 
     constructor(
         private actions$: Actions,

@@ -10,6 +10,7 @@ export interface CoursesState {
     length: number;
     start: number;
     count: number;
+    errorMessage: string;
 }
 
 export const initialState: CoursesState = {
@@ -17,6 +18,7 @@ export const initialState: CoursesState = {
     length: 0,
     start: 0,
     count: 5,
+    errorMessage: '',
 };
 
 export const coursesReducer = createReducer(
@@ -28,6 +30,20 @@ export const coursesReducer = createReducer(
             items: data,
             length: data.length,
             count: state.count + 5,
+        })
+    ),
+    on(
+        CoursesActions.loadCoursesFailure,
+        (state, { error }): CoursesState => ({
+            ...state,
+            errorMessage: error,
+        })
+    ),
+    on(
+        CoursesActions.deleteCourseFailure,
+        (state, { error }): CoursesState => ({
+            ...state,
+            errorMessage: error,
         })
     )
 );

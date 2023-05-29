@@ -76,12 +76,6 @@ export class CoursesService {
     }
 
     public deleteCourse(id: string, count?: number): Observable<void> {
-        return this.http.delete<void>(`${this.baseUrl}/courses/${id}`).pipe(
-            tap((data) => {
-                this.coursesList = [];
-
-                this.getCourses(0, count).subscribe();
-            })
-        );
+        return this.http.delete<void>(`${this.baseUrl}/courses/${id}`);
     }
 }

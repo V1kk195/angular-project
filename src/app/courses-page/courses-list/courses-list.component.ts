@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { Course } from '../../types/course';
 import { CoursesService } from '../../core/courses-services/courses.service';
 import { LoaderService } from '../../shared/loader/service/loader.service';
-import { Store } from '@ngrx/store';
 import {
     CoursesActions,
     selectCoursesLength,
@@ -32,10 +32,10 @@ export class CoursesListComponent implements OnInit {
 
     private loadCourses(start?: number, count?: number): void {
         this.store.dispatch(CoursesActions.loadCourses({ start, count }));
-        this.nextStartPoint = this.nextStartPoint + 5;
     }
 
     public onLoadMoreClick(): void {
+        this.nextStartPoint = this.nextStartPoint + 5;
         this.loadCourses(0, this.nextStartPoint);
     }
 
@@ -43,9 +43,12 @@ export class CoursesListComponent implements OnInit {
         const res = confirm('Do you really want to delete this course?');
 
         if (res) {
-            this.coursesService
-                .deleteCourse(courseId, this.nextStartPoint)
-                .subscribe();
+            this.store.dispatch(
+                CoursesActions.deleteCourse({
+                    id: courseId,
+                    count: this.nextStartPoint,
+                })
+            );
         }
     }
 
