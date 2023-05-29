@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AuthService } from '../core/auth/auth.service';
 import { Router } from '@angular/router';
-import { ROUTES_NAMES } from '../core/constants';
 import { Store } from '@ngrx/store';
 import { AuthActions } from '../state/auth';
 
@@ -21,12 +20,6 @@ export class LoginPageComponent {
     ) {}
 
     public onLogIn() {
-        // this.authService
-        //     .logIn({ login: this.email, password: this.password })
-        //     .subscribe((data) => {
-        //         localStorage.setItem('token', data.token);
-        //         this.router.navigateByUrl(`/${ROUTES_NAMES.courses}`);
-        //     });
         this.store.dispatch(
             AuthActions.login({
                 credentials: { login: this.email, password: this.password },

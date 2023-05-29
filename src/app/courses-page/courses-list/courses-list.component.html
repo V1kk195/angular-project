@@ -1,17 +1,12 @@
 <app-courses-header></app-courses-header>
 <ng-container
     *ngIf="
-        loaderService.isLoading || coursesService.courses.length > 0;
+        loaderService.isLoading || (coursesCount$ | async)! > 0;
         else elseBlock
     "
 >
     <ul class="container">
-        <li
-            *ngFor="
-                let course of coursesService.courses;
-                trackBy: courseTrackBy
-            "
-        >
+        <li *ngFor="let course of courses$ | async; trackBy: courseTrackBy">
             <app-course
                 [course]="course"
                 (courseDeleted)="onDeleteCourse($event)"

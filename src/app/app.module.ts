@@ -16,6 +16,7 @@ import { httpInterceptorProviders } from './core/interceptors';
 import { AuthEffects } from './state/auth/auth.effects';
 import { rootReducer } from './state';
 import { CookieService } from 'ngx-cookie-service';
+import { CoursesEffects } from './state/courses/courses.effects';
 
 @NgModule({
     declarations: [AppComponent],
@@ -29,12 +30,13 @@ import { CookieService } from 'ngx-cookie-service';
         HttpClientModule,
         AngularSvgIconModule.forRoot(),
         StoreModule.forRoot(rootReducer),
-        EffectsModule.forRoot([AuthEffects]),
+        EffectsModule.forRoot([AuthEffects, CoursesEffects]),
         StoreDevtoolsModule.instrument({
             maxAge: 25,
             logOnly: !isDevMode(),
             trace: true,
         }),
+        EffectsModule.forFeature([CoursesEffects]),
     ],
     providers: [httpInterceptorProviders, CookieService],
     bootstrap: [AppComponent],

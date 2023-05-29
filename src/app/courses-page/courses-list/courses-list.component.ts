@@ -4,6 +4,12 @@ import { finalize, Subscription } from 'rxjs';
 import { Course } from '../../types/course';
 import { CoursesService } from '../../core/courses-services/courses.service';
 import { LoaderService } from '../../shared/loader/service/loader.service';
+import { Store } from '@ngrx/store';
+import {
+    CoursesActions,
+    selectCoursesLength,
+    selectCoursesList,
+} from 'src/app/state/courses';
 
 @Component({
     selector: 'app-courses-list',
@@ -14,15 +20,17 @@ export class CoursesListComponent implements OnInit, OnDestroy {
     private nextStartPoint = 5;
     private subs: Subscription[] = [];
     public coursesEnded = false;
+    public courses$ = this.store.select(selectCoursesList);
+    public coursesCount$ = this.store.select(selectCoursesLength);
 
     constructor(
         public coursesService: CoursesService,
-        public loaderService: LoaderService
+        public loaderService: LoaderService,
+        private store: Store
     ) {}
 
     public ngOnInit(): void {
-        this.loaderService.setIsLoading(true);
-        this.getCourses();
+        this.store.dispatch(CoursesActions.loadCourses());
     }
 
     public ngOnDestroy(): void {
