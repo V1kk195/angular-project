@@ -1,10 +1,10 @@
-<label class="label">
+<label class="label" [formGroup]="form!">
     Authors:
     <input
         type="text"
         placeholder="Start typing"
         name="authors"
         required
-        [(ngModel)]="authors"
+        [formControlName]="controlName"
     />
 </label>
