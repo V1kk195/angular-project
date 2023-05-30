@@ -47,12 +47,6 @@ export class CoursesService {
             );
     }
 
-    public searchCourses(textFragment: string) {
-        this.coursesList = [];
-
-        return this.getCourses(undefined, undefined, undefined, textFragment);
-    }
-
     public createCourse(data: CourseApiModel): Observable<CourseApiModel> {
         return this.http.post<CourseApiModel>(`${this.baseUrl}/courses`, data);
     }
@@ -76,12 +70,6 @@ export class CoursesService {
     }
 
     public deleteCourse(id: string, count?: number): Observable<void> {
-        return this.http.delete<void>(`${this.baseUrl}/courses/${id}`).pipe(
-            tap((data) => {
-                this.coursesList = [];
-
-                this.getCourses(0, count).subscribe();
-            })
-        );
+        return this.http.delete<void>(`${this.baseUrl}/courses/${id}`);
     }
 }

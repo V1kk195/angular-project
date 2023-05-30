@@ -1,8 +1,8 @@
 <header class="container">
     <h1 class="logo" routerLink="">video course</h1>
 
-    <div class="buttons" *appIfAuthenticated="authService.isAuthenticated">
-        <button>{{ userInfo?.name?.first }}</button>
+    <div class="buttons" *appIfAuthenticated>
+        <button>{{ (userInfo$ | async)?.firstName }}</button>
         <button (click)="onLogOut()">Log out</button>
     </div>
 </header>

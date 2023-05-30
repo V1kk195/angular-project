@@ -4,21 +4,22 @@ import { HttpClient } from '@angular/common/http';
 import { CurrentUserResponse, LoginRequest, LoginResponse } from '../../types';
 import { Observable } from 'rxjs';
 import { BASE_URL } from '../constants';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
     private baseUrl = BASE_URL;
-    constructor(private http: HttpClient) {}
+    constructor(
+        private http: HttpClient,
+        private cookieService: CookieService
+    ) {}
 
-    public logIn(userInfo: {
-        email: string;
-        password: string;
-    }): Observable<LoginResponse> {
+    public logIn({ login, password }: LoginRequest): Observable<LoginResponse> {
         return this.http.post<LoginResponse>(`${this.baseUrl}/auth/login`, {
-            login: userInfo.email,
-            password: userInfo.password,
+            login,
+            password,
         } as LoginRequest);
     }
 
@@ -33,7 +34,7 @@ export class AuthService {
     public getUserInfo(): Observable<CurrentUserResponse> {
         return this.http.post<CurrentUserResponse>(
             `${this.baseUrl}/auth/userinfo`,
-            { token: this.getAuthorizationToken() }
+            { token: this.cookieService.get('token') }
         );
     }
 
