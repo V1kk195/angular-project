@@ -5,8 +5,6 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { ReactiveFormsModule } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,12 +15,12 @@ import { LoginPageModule } from './login-page/login-page.module';
 import { httpInterceptorProviders } from './core/interceptors';
 import { AuthEffects } from './state/auth/auth.effects';
 import { rootReducer } from './state';
+import { CookieService } from 'ngx-cookie-service';
 import { CoursesEffects } from './state/courses/courses.effects';
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
-        ReactiveFormsModule,
         BrowserModule,
         AppRoutingModule,
         CoursesPageModule,

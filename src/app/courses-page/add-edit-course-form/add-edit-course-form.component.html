@@ -1,5 +1,5 @@
 <div class="container">
-    <form [formGroup]="form" (ngSubmit)="onSave()" class="form">
+    <div class="form">
         <h1>{{ heading }}</h1>
         <label>
             Title:
@@ -8,22 +8,8 @@
                 placeholder="Input title"
                 name="title"
                 required
-                formControlName="title"
+                [(ngModel)]="title"
             />
-            <span
-                class="error-message"
-                *ngIf="f.title.touched && f.title?.hasError('required')"
-                >{{ errorMessages.required }}</span
-            >
-            <span
-                class="error-message"
-                *ngIf="f.title.touched && f.title?.hasError('maxlength')"
-                >{{
-                    errorMessages.maxlength(
-                        f.title.errors?.['maxlength']['requiredLength']
-                    )
-                }}</span
-            >
         </label>
 
         <label>
@@ -34,82 +20,17 @@
                 name="description"
                 required
                 rows="4"
-                formControlName="description"
+                [(ngModel)]="description"
             ></textarea>
-            <span
-                class="error-message"
-                *ngIf="
-                    f.description.touched && f.description?.hasError('required')
-                "
-                >{{ errorMessages.required }}</span
-            >
-            <span
-                class="error-message"
-                *ngIf="
-                    f.description.touched &&
-                    f.description?.hasError('maxlength')
-                "
-                >{{
-                errorMessages.maxlength(
-                    f.description.errors?.['maxlength']['requiredLength']
-                )
-                }}</span
-            >
         </label>
 
-        <div>
-            <app-duration-field
-                [form]="form"
-                controlName="duration"
-            ></app-duration-field>
-            <span
-                class="error-message"
-                *ngIf="f.duration.touched && f.duration?.hasError('required')"
-                >{{ errorMessages.required }}</span
-            >
-        </div>
-
-        <div>
-            <app-date-field [form]="form" controlName="date"></app-date-field>
-            <span
-                class="error-message"
-                *ngIf="f.date.touched && f.date?.hasError('required')"
-                >{{ errorMessages.required }}</span
-            >
-        </div>
-
-        <div>
-            <app-authors-field
-                [form]="form"
-                controlName="authors"
-            ></app-authors-field>
-            <span
-                class="error-message"
-                *ngIf="f.authors.touched && f.authors?.hasError('required')"
-                >{{ errorMessages.required }}</span
-            >
-        </div>
+        <app-duration-field [duration]="duration!"></app-duration-field>
+        <app-date-field [date]="dateFormatted"></app-date-field>
+        <app-authors-field [authors]="authors"></app-authors-field>
 
         <div class="buttons">
             <button class="button-cancel" (click)="onCancel()">Cancel</button>
-            <button
-                type="submit"
-                [disabled]="!form.valid"
-                class="button-submit"
-            >
-                Save
-            </button>
+            <button class="button-submit" (click)="onSave()">Save</button>
         </div>
-
-        <p>STATUS {{ form.status }}</p>
-        <p>VALID {{ form.valid }}</p>
-        <div *ngFor="let key of form.value | keyvalue">
-            <p>{{ key.key }} : {{ key.value }}</p>
-        </div>
-
-        <div *ngFor="let key of f.title.errors || {} | keyvalue">
-            ERRORS
-            <p>{{ key.key }} : {{ key.value }}</p>
-        </div>
-    </form>
+    </div>
 </div>

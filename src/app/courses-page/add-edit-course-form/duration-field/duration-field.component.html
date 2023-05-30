@@ -1,4 +1,4 @@
-<div class="durationRow" [formGroup]="form!">
+<div class="durationRow">
     <label class="label">
         Duration:
         <input
@@ -6,8 +6,8 @@
             placeholder="minutes"
             name="duration"
             required
-            [formControlName]="controlName"
+            [(ngModel)]="duration"
         />
     </label>
-    <span class="hours">{{ form?.value[controlName] | minsToHours }}</span>
+    <span class="hours">{{ duration | minsToHours }}</span>
 </div>

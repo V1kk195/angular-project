@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Author } from '../../../types/course';
-import { FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-authors-field',
@@ -9,6 +8,5 @@ import { FormGroup } from '@angular/forms';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthorsFieldComponent {
-    @Input() form?: FormGroup;
-    @Input() controlName = '';
+    @Input() authors: Author[] = [];
 }

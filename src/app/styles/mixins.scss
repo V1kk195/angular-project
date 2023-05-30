@@ -63,11 +63,6 @@
             border-radius: 3px;
 
             border: none;
-            cursor: pointer;
-
-            &:disabled {
-                cursor: not-allowed;
-            }
         }
 
         .button-submit {
@@ -75,8 +70,7 @@
             color: #ffffff;
         }
 
-        .button-cancel,
-        button:disabled {
+        .button-cancel {
             background: #d0cfd2;
             color: #5b616f;
         }

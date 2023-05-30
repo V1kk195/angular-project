@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-date-field',
@@ -8,6 +7,5 @@ import { FormGroup } from '@angular/forms';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateFieldComponent {
-    @Input() form?: FormGroup;
-    @Input() controlName = '';
+    @Input() date = '';
 }

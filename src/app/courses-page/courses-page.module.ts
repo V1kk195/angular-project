@@ -14,7 +14,6 @@ import { AddEditCourseFormComponent } from './add-edit-course-form/add-edit-cour
 import { DurationFieldComponent } from './add-edit-course-form/duration-field/duration-field.component';
 import { AuthorsFieldComponent } from './add-edit-course-form/authors-field/authors-field.component';
 import { DateFieldComponent } from './add-edit-course-form/date-field/date-field.component';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -30,7 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         EditCourseComponent,
         AddEditCourseFormComponent,
     ],
-    imports: [SharedModule, RouterLink, RouterOutlet, ReactiveFormsModule],
+    imports: [SharedModule, RouterLink, RouterOutlet],
     exports: [CoursesPageComponent, CoursesListComponent],
 })
 export class CoursesPageModule {}

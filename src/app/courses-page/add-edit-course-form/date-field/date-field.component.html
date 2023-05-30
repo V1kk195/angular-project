@@ -1,10 +1,10 @@
-<label class="label" [formGroup]="form!">
+<label class="label">
     Date:
     <input
         type="date"
         placeholder="MM/DD/YYYY"
         name="date"
         required
-        [formControlName]="controlName"
+        [(ngModel)]="date"
     />
 </label>
