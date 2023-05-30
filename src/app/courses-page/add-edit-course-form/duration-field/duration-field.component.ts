@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-duration-field',
@@ -7,5 +8,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DurationFieldComponent {
-    @Input() duration?: number;
+    @Input() form?: FormGroup;
+    @Input() controlName = '';
 }
