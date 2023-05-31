@@ -10,18 +10,23 @@ import {
     ViewEncapsulation,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators,
+} from '@angular/forms';
 
 import { ROUTES_NAMES } from '../../core/constants';
 import { Course, CourseApiModel } from '../../types/course';
 
-export interface FormData {
-    title: string;
-    description: string;
-    duration: number;
-    date: string;
-    authors: string;
-}
+export type FormData = {
+    title: FormControl<string>;
+    description: FormControl<string>;
+    duration: FormControl<number | null>;
+    creationDate: FormControl<string>;
+    authors: FormControl<string>;
+};
 
 @Component({
     selector: 'app-add-edit-course-form',
@@ -37,7 +42,9 @@ export class AddEditCourseFormComponent implements OnInit, OnChanges {
 
     public heading = '';
 
-    public form = this.fb.nonNullable.group({
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    public form: FormGroup<FormData> = this.fb.nonNullable.group({
         title: ['', [Validators.required, Validators.maxLength(50)]],
         description: ['', [Validators.required, Validators.maxLength(500)]],
         duration: [null, Validators.required],
@@ -53,7 +60,7 @@ export class AddEditCourseFormComponent implements OnInit, OnChanges {
     constructor(private router: Router, private fb: FormBuilder) {}
 
     public get f() {
-        return this.form.controls;
+        return this.form?.controls;
     }
 
     public ngOnInit() {
@@ -61,10 +68,8 @@ export class AddEditCourseFormComponent implements OnInit, OnChanges {
     }
 
     public ngOnChanges(changes: SimpleChanges) {
-        if (changes['courseInfo']) {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            this.form.patchValue(this.courseInfo);
+        if (changes['courseInfo'] && this.courseInfo) {
+            this.form?.patchValue(this.courseInfo);
         }
     }
 
@@ -73,7 +78,7 @@ export class AddEditCourseFormComponent implements OnInit, OnChanges {
     }
 
     public onSave(): void {
-        const formData = this.form.getRawValue();
+        const formData = this.form?.getRawValue();
 
         const courseData: CourseApiModel = {
             name: formData.title,
