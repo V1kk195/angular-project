@@ -46,7 +46,7 @@ export class CoursesService {
     public getCourseById(id: string): Observable<Course> {
         return this.http
             .get<CourseApiModel>(`${this.baseUrl}/courses/${id}`)
-            .pipe(map((course) => this.transformData([course])[0]));
+            .pipe(map((course) => transformCourseFromApiModel(course)));
     }
 
     public updateCourse(data: Course): Course {

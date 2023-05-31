@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { Course, CourseApiModel } from '../../types/course';
 import { ROUTES_NAMES } from '../../core/constants';
@@ -12,7 +13,7 @@ import { CoursesService } from '../../core/courses-services/courses.service';
 })
 export class EditCourseComponent implements OnInit {
     private courseId?: string;
-    public courseInfo?: Course;
+    public courseInfo$?: Observable<Course>;
 
     constructor(
         private route: ActivatedRoute,
@@ -24,11 +25,7 @@ export class EditCourseComponent implements OnInit {
         this.courseId = this.route.snapshot.paramMap.get('id') || '';
 
         if (this.courseId) {
-            this.coursesService
-                .getCourseById(this.courseId)
-                .subscribe((course) => {
-                    this.courseInfo = course;
-                });
+            this.courseInfo$ = this.coursesService.getCourseById(this.courseId);
         }
     }
 

@@ -70,10 +70,16 @@
         </div>
 
         <div>
-            <app-date-field [form]="form" controlName="date"></app-date-field>
+            <app-date-field
+                [form]="form"
+                controlName="creationDate"
+            ></app-date-field>
             <span
                 class="error-message"
-                *ngIf="f.date.touched && f.date?.hasError('required')"
+                *ngIf="
+                    f.creationDate.touched &&
+                    f.creationDate?.hasError('required')
+                "
                 >{{ errorMessages.required }}</span
             >
         </div>

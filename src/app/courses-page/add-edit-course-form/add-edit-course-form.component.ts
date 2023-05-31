@@ -3,16 +3,25 @@ import {
     Component,
     EventEmitter,
     Input,
+    OnChanges,
     OnInit,
     Output,
+    SimpleChanges,
     ViewEncapsulation,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { DatePipe } from '@angular/common';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { ROUTES_NAMES } from '../../core/constants';
-import { Author, CourseApiModel } from '../../types/course';
+import { Course, CourseApiModel } from '../../types/course';
+
+export interface FormData {
+    title: string;
+    description: string;
+    duration: number;
+    date: string;
+    authors: string;
+}
 
 @Component({
     selector: 'app-add-edit-course-form',
@@ -21,29 +30,18 @@ import { Author, CourseApiModel } from '../../types/course';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class AddEditCourseFormComponent implements OnInit {
+export class AddEditCourseFormComponent implements OnInit, OnChanges {
     @Input() type: 'add' | 'edit' = 'add';
-    // @Input() title = '';
-    // @Input() description = '';
-    @Input() duration = 0;
-    @Input() set date(value: string) {
-        this.dateFormatted = new DatePipe('en-US').transform(
-            new Date(value).toISOString(),
-            'yyyy-MM-dd'
-        )!;
-    }
-    @Input() authors: Author[] = [];
-
+    @Input() courseInfo?: Course;
     @Output() saveEvent = new EventEmitter<CourseApiModel>();
 
     public heading = '';
-    public dateFormatted = '';
 
     public form = this.fb.nonNullable.group({
         title: ['', [Validators.required, Validators.maxLength(50)]],
         description: ['', [Validators.required, Validators.maxLength(500)]],
         duration: [null, Validators.required],
-        date: ['', Validators.required],
+        creationDate: ['', Validators.required],
         authors: ['', Validators.required],
     });
 
@@ -62,6 +60,14 @@ export class AddEditCourseFormComponent implements OnInit {
         this.heading = this.type === 'add' ? 'New course' : 'Edit course';
     }
 
+    public ngOnChanges(changes: SimpleChanges) {
+        if (changes['courseInfo']) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            this.form.patchValue(this.courseInfo);
+        }
+    }
+
     public onCancel(): void {
         this.router.navigateByUrl(`/${ROUTES_NAMES.courses}`);
     }
@@ -72,11 +78,9 @@ export class AddEditCourseFormComponent implements OnInit {
         const courseData: CourseApiModel = {
             name: formData.title,
             description: formData.description,
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
             authors: formData.authors,
             isTopRated: false,
-            date: formData.date,
+            date: formData.creationDate,
             length: formData.duration!,
         };
 

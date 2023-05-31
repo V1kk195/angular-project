@@ -5,6 +5,7 @@ export interface Course {
     duration: number;
     description: string;
     topRated: boolean;
+    authors: string;
 }
 
 export type Author = {
@@ -18,6 +19,6 @@ export type CourseApiModel = {
     date: string;
     length: number;
     description: string;
-    authors: Author[];
+    authors: string;
     isTopRated: boolean;
 };

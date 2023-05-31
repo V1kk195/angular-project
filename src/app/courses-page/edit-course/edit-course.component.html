@@ -1,6 +1,5 @@
 <app-add-edit-course-form
     type="edit"
-    [title]="courseInfo?.title!"
-    [date]="courseInfo?.creationDate!"
+    [courseInfo]="(courseInfo$ | async)!"
     (saveEvent)="onSave($event)"
 ></app-add-edit-course-form>
