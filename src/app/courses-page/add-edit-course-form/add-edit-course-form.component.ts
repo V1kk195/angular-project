@@ -39,7 +39,7 @@ export class AddEditCourseFormComponent implements OnInit {
     public heading = '';
     public dateFormatted = '';
 
-    public form = this.fb.group({
+    public form = this.fb.nonNullable.group({
         title: ['', [Validators.required, Validators.maxLength(50)]],
         description: ['', [Validators.required, Validators.maxLength(500)]],
         duration: [null, Validators.required],
@@ -55,7 +55,6 @@ export class AddEditCourseFormComponent implements OnInit {
     constructor(private router: Router, private fb: FormBuilder) {}
 
     public get f() {
-        console.log(this.form.errors);
         return this.form.controls;
     }
 
@@ -64,20 +63,23 @@ export class AddEditCourseFormComponent implements OnInit {
     }
 
     public onCancel(): void {
-        console.log('cancelled adding course');
         this.router.navigateByUrl(`/${ROUTES_NAMES.courses}`);
     }
 
     public onSave(): void {
-        // const courseData: CourseApiModel = {
-        //     name: this.title,
-        //     description: this.description,
-        //     authors: this.authors,
-        //     isTopRated: false,
-        //     date: this.dateFormatted,
-        //     length: this.duration,
-        // };
-        // console.log('added course', courseData);
-        // this.saveEvent.emit(courseData);
+        const formData = this.form.getRawValue();
+
+        const courseData: CourseApiModel = {
+            name: formData.title,
+            description: formData.description,
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            authors: formData.authors,
+            isTopRated: false,
+            date: formData.date,
+            length: formData.duration!,
+        };
+
+        this.saveEvent.emit(courseData);
     }
 }

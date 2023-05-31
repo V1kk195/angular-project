@@ -4,6 +4,7 @@ import { delay, map, Observable, tap } from 'rxjs';
 
 import { Course, CourseApiModel } from '../../types/course';
 import { BASE_URL } from '../constants';
+import { transformCourseFromApiModel } from '../../utils/transformers';
 
 @Injectable({
     providedIn: 'root',
@@ -18,16 +19,7 @@ export class CoursesService {
     constructor(private http: HttpClient) {}
 
     private transformData(data: CourseApiModel[]): Course[] {
-        return data.map(
-            (item): Course => ({
-                id: item.id?.toString() || '',
-                title: item.name,
-                creationDate: item.date,
-                duration: item.length,
-                description: item.description,
-                topRated: item.isTopRated,
-            })
-        );
+        return data.map(transformCourseFromApiModel);
     }
 
     public getCourses(
@@ -69,7 +61,7 @@ export class CoursesService {
         return data;
     }
 
-    public deleteCourse(id: string, count?: number): Observable<void> {
+    public deleteCourse(id: string): Observable<void> {
         return this.http.delete<void>(`${this.baseUrl}/courses/${id}`);
     }
 }

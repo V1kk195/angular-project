@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, mergeMap, of, tap } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { CoursesActions } from '.';
 import { CoursesService } from '../../core/courses-services/courses.service';
 import { LoaderService } from '../../shared/loader/service/loader.service';
-import { ActivatedRoute } from '@angular/router';
+import { ROUTES_NAMES } from '../../core/constants';
 
 @Injectable()
 export class CoursesEffects {
@@ -62,10 +63,35 @@ export class CoursesEffects {
         );
     });
 
+    createCourse$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(CoursesActions.createCourse),
+            exhaustMap(({ course }) => {
+                return this.coursesService.createCourse(course).pipe(
+                    map(() => CoursesActions.createCourseSuccess()),
+                    catchError((err) =>
+                        of(CoursesActions.createCourseFailure(err))
+                    )
+                );
+            })
+        );
+    });
+
+    createCourseSuccess$ = createEffect(
+        () => {
+            return this.actions$.pipe(
+                ofType(CoursesActions.createCourseSuccess),
+                tap(() => this.router.navigateByUrl(`/${ROUTES_NAMES.courses}`))
+            );
+        },
+        { dispatch: false }
+    );
+
     constructor(
         private actions$: Actions,
         private coursesService: CoursesService,
         private loaderService: LoaderService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private router: Router
     ) {}
 }
