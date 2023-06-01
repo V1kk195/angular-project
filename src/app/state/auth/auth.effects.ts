@@ -5,13 +5,13 @@ import {
     ofType,
     ROOT_EFFECTS_INIT,
 } from '@ngrx/effects';
-import { AuthService } from '../../core/auth/auth.service';
 import { catchError, exhaustMap, map, mergeMap, of, tap } from 'rxjs';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../../core/auth/auth.service';
 import { AuthActions } from '.';
 import { CurrentUserResponse, User } from '../../types';
-import { Router } from '@angular/router';
 import { ROUTES_NAMES } from '../../core/constants';
-import { CookieService } from 'ngx-cookie-service';
 
 const setTokenCookie = (token: string): void => {
     document.cookie = `token=${token}`;
@@ -41,6 +41,11 @@ export class AuthEffects {
                                 AuthActions.authSuccess({
                                     user: mapUserInfo(userInfo),
                                 })
+                            ),
+                            tap(() =>
+                                this.router.navigateByUrl(
+                                    `/${ROUTES_NAMES.courses}`
+                                )
                             )
                         )
                     ),
@@ -50,24 +55,12 @@ export class AuthEffects {
         );
     });
 
-    loginSuccess$ = createEffect(
-        () => {
-            return this.actions$.pipe(
-                ofType(AuthActions.authSuccess),
-                tap(() => {
-                    this.router.navigateByUrl(`/${ROUTES_NAMES.courses}`);
-                })
-            );
-        },
-        { dispatch: false }
-    );
-
     logout$ = createEffect(
         () => {
             return this.actions$.pipe(
                 ofType(AuthActions.logout),
                 tap(() => {
-                    this.cookieService.delete('token');
+                    this.authService.logOut();
                     this.router.navigateByUrl(`/${ROUTES_NAMES.login}`);
                 })
             );
@@ -94,7 +87,6 @@ export class AuthEffects {
     constructor(
         private actions$: Actions,
         private authService: AuthService,
-        private router: Router,
-        private cookieService: CookieService
+        private router: Router
     ) {}
 }
