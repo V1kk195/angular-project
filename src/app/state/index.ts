@@ -1,9 +1,7 @@
-import { authFeatureKey, authReducer, AuthState } from './auth/auth.reducer';
-import {
-    coursesFeatureKey,
-    coursesReducer,
-    CoursesState,
-} from './courses/courses.reducer';
+import { coursesReducer, CoursesState } from './courses/courses.reducer';
+import { authFeatureKey } from './auth/featureKey';
+import { coursesFeatureKey } from './courses/featureKey';
+import { authReducer, AuthState } from './auth/auth.reducer';
 
 export interface AppState {
     [authFeatureKey]: AuthState;

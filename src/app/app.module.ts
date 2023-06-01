@@ -10,7 +10,6 @@ import { CookieService } from 'ngx-cookie-service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CoursesPageModule } from './courses-page/courses-page.module';
 import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from './layout/layout.module';
 import { LoginPageModule } from './login-page/login-page.module';
@@ -25,7 +24,6 @@ import { CoursesEffects } from './state/courses/courses.effects';
         ReactiveFormsModule,
         BrowserModule,
         AppRoutingModule,
-        CoursesPageModule,
         SharedModule,
         LayoutModule,
         LoginPageModule,
