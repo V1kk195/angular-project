@@ -43,3 +43,17 @@ export const createCourseFailure = createAction(
     '[Courses API] Create Course Failure',
     props<{ error: any }>()
 );
+
+export const updateCourse = createAction(
+    '[Edit Course Page] Update Course Failure',
+    props<{ course: CourseApiModel }>()
+);
+
+export const updateCourseSuccess = createAction(
+    '[Courses API] Update Course Success'
+);
+
+export const updateCourseFailure = createAction(
+    '[Courses API] Update Course Failure',
+    props<{ error: any }>()
+);

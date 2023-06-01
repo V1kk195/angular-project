@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { Course, CourseApiModel } from '../../types/course';
-import { ROUTES_NAMES } from '../../core/constants';
 import { CoursesService } from '../../core/courses-services/courses.service';
+import { CoursesActions } from 'src/app/state/courses';
 
 @Component({
     selector: 'app-edit-course',
@@ -17,8 +18,8 @@ export class EditCourseComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private router: Router,
-        private coursesService: CoursesService
+        private coursesService: CoursesService,
+        private store: Store
     ) {}
 
     public ngOnInit() {
@@ -29,8 +30,11 @@ export class EditCourseComponent implements OnInit {
         }
     }
 
-    public onSave(courseInfo: CourseApiModel) {
-        console.log('info updated', courseInfo);
-        this.router.navigateByUrl(`/${ROUTES_NAMES.courses}`);
+    public onSave(course: CourseApiModel) {
+        this.store.dispatch(
+            CoursesActions.updateCourse({
+                course: { ...course, id: Number(this.courseId) },
+            })
+        );
     }
 }

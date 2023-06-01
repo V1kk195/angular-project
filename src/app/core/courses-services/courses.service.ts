@@ -49,16 +49,11 @@ export class CoursesService {
             .pipe(map((course) => transformCourseFromApiModel(course)));
     }
 
-    public updateCourse(data: Course): Course {
-        this.coursesList = this.coursesList.map((item) => {
-            if (item.id === data.id) {
-                return data;
-            }
-
-            return item;
-        });
-
-        return data;
+    public updateCourse(data: CourseApiModel): Observable<CourseApiModel> {
+        return this.http.patch<CourseApiModel>(
+            `${this.baseUrl}/courses/${data.id}`,
+            data
+        );
     }
 
     public deleteCourse(id: string): Observable<void> {

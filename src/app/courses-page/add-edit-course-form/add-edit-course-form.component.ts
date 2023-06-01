@@ -19,6 +19,7 @@ import {
 
 import { ROUTES_NAMES } from '../../core/constants';
 import { Course, CourseApiModel } from '../../types/course';
+import { formatDate, formatDateToISO } from '../../utils/transformers';
 
 export type FormData = {
     title: FormControl<string>;
@@ -69,7 +70,10 @@ export class AddEditCourseFormComponent implements OnInit, OnChanges {
 
     public ngOnChanges(changes: SimpleChanges) {
         if (changes['courseInfo'] && this.courseInfo) {
-            this.form?.patchValue(this.courseInfo);
+            this.form?.patchValue({
+                ...this.courseInfo,
+                creationDate: formatDate(this.courseInfo.creationDate),
+            });
         }
     }
 
@@ -85,7 +89,7 @@ export class AddEditCourseFormComponent implements OnInit, OnChanges {
             description: formData.description,
             authors: formData.authors,
             isTopRated: false,
-            date: formData.creationDate,
+            date: formatDateToISO(formData.creationDate),
             length: formData.duration!,
         };
 

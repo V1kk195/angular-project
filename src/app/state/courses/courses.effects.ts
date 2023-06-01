@@ -87,6 +87,30 @@ export class CoursesEffects {
         { dispatch: false }
     );
 
+    updateCourse$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(CoursesActions.updateCourse),
+            exhaustMap(({ course }) => {
+                return this.coursesService.updateCourse(course).pipe(
+                    map(() => CoursesActions.updateCourseSuccess()),
+                    catchError((err) =>
+                        of(CoursesActions.updateCourseFailure(err))
+                    )
+                );
+            })
+        );
+    });
+
+    updateCourseSuccess$ = createEffect(
+        () => {
+            return this.actions$.pipe(
+                ofType(CoursesActions.updateCourseSuccess),
+                tap(() => this.router.navigateByUrl(`/${ROUTES_NAMES.courses}`))
+            );
+        },
+        { dispatch: false }
+    );
+
     constructor(
         private actions$: Actions,
         private coursesService: CoursesService,

@@ -1,4 +1,5 @@
 import { Course, CourseApiModel } from '../../types/course';
+import { DatePipe } from '@angular/common';
 
 export const transformCourseFromApiModel = (item: CourseApiModel): Course => {
     return {
@@ -22,4 +23,12 @@ export const transformCourseToApiModel = (item: Course): CourseApiModel => {
         length: item.duration,
         name: item.title,
     };
+};
+
+export const formatDate = (value: string): string => {
+    return new DatePipe('en-US').transform(value, 'yyyy-MM-dd') || '';
+};
+
+export const formatDateToISO = (value: string): string => {
+    return new Date(value).toISOString();
 };
