@@ -92,7 +92,7 @@
             ></app-authors-field>
             <span
                 class="error-message"
-                *ngIf="f.authors.touched && f.authors?.hasError('required')"
+                *ngIf="f.authors?.hasError('required')"
                 >{{ errorMessages.required }}</span
             >
         </div>
