@@ -1,13 +1,15 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     Input,
     OnInit,
 } from '@angular/core';
-import { Author } from '../../../types/course';
 import { FormGroup } from '@angular/forms';
+import { Observable, take } from 'rxjs';
+
+import { Author } from '../../../types/course';
 import { CoursesService } from '../../../core/courses-services/courses.service';
-import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-authors-field',
@@ -15,7 +17,7 @@ import { Observable } from 'rxjs';
     styleUrls: ['./authors-field.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthorsFieldComponent {
+export class AuthorsFieldComponent implements OnInit {
     @Input() form?: FormGroup;
     @Input() controlName = '';
 
@@ -23,7 +25,20 @@ export class AuthorsFieldComponent {
     public chosenAuthors: Author[] = [];
     public value?: string;
 
-    constructor(private courseService: CoursesService) {}
+    constructor(
+        private courseService: CoursesService,
+        private ref: ChangeDetectorRef
+    ) {}
+
+    public ngOnInit(): void {
+        this.form
+            ?.get(this.controlName)
+            ?.valueChanges.pipe(take(1))
+            .subscribe((data: Author[]) => {
+                this.chosenAuthors = data;
+                this.ref.markForCheck();
+            });
+    }
 
     public onInputChange(event: Event): void {
         this.authors$ = this.courseService.getAuthors(
@@ -43,5 +58,6 @@ export class AuthorsFieldComponent {
         this.chosenAuthors = this.chosenAuthors.filter(
             (item) => item.id !== author.id
         );
+        this.form?.patchValue({ authors: this.chosenAuthors });
     }
 }

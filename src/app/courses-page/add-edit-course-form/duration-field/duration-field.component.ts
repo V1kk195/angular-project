@@ -1,5 +1,14 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    Input,
+    OnInit,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { take } from 'rxjs';
+
+import { Author } from '../../../types/course';
 
 @Component({
     selector: 'app-duration-field',
@@ -7,7 +16,18 @@ import { FormGroup } from '@angular/forms';
     styleUrls: ['./duration-field.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DurationFieldComponent {
+export class DurationFieldComponent implements OnInit {
     @Input() form?: FormGroup;
     @Input() controlName = '';
+
+    constructor(private ref: ChangeDetectorRef) {}
+
+    public ngOnInit(): void {
+        this.form
+            ?.get(this.controlName)
+            ?.valueChanges.pipe(take(1))
+            .subscribe(() => {
+                this.ref.markForCheck();
+            });
+    }
 }

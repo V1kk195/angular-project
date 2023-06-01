@@ -37,16 +37,23 @@
     }
 
     .dropdown {
-        cursor: pointer;
         border-radius: 3px;
         border: 1px solid #ced0db;
 
-        option:hover {
-            background-color: #eeeeee;
-        }
+        option {
+            cursor: pointer;
 
-        option:checked {
-            background-color: #eeeeee;
+            &:hover {
+                background-color: #eeeeee;
+            }
+
+            &:checked {
+                background-color: #eeeeee;
+            }
+
+            &:disabled {
+                cursor: default;
+            }
         }
     }
 }

@@ -1,13 +1,7 @@
 <label class="label" [formGroup]="form!">
     Authors:
-    <!--    <select name="authors" required [formControlName]="controlName" multiple>-->
-    <!--        <option *ngFor="let author of authors$ | async" [value]="author">-->
-    <!--            {{ author.name }}-->
-    <!--        </option>-->
-    <!--    </select>-->
-
     <div class="select-container" role="textbox">
-        <div [formControlName]="controlName" class="chips">
+        <div class="chips">
             <div *ngFor="let option of chosenAuthors">
                 {{ option.name
                 }}<span (click)="onDeleteOption(option)" class="deleteIcon"
@@ -24,8 +18,16 @@
             [ngModelOptions]="{ standalone: true }"
         />
     </div>
-    <div *ngIf="value" class="dropdown">
-        <span *ngIf="(authors$ | async)?.length === 0">No data</span>
+
+    <select
+        [formControlName]="controlName"
+        multiple
+        *ngIf="value"
+        class="dropdown"
+    >
+        <option *ngIf="(authors$ | async)?.length === 0" disabled>
+            No data
+        </option>
 
         <option
             *ngFor="let author of authors$ | async"
@@ -34,5 +36,5 @@
         >
             {{ author.name }}
         </option>
-    </div>
+    </select>
 </label>
