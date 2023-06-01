@@ -16,7 +16,7 @@ export const transformCourseFromApiModel = (item: CourseApiModel): Course => {
 export const transformCourseToApiModel = (item: Course): CourseApiModel => {
     return {
         id: Number(item.id),
-        authors: '',
+        authors: item.authors,
         date: item.creationDate,
         description: item.description,
         isTopRated: item?.topRated || false,

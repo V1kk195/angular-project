@@ -18,7 +18,7 @@ import {
 } from '@angular/forms';
 
 import { ROUTES_NAMES } from '../../core/constants';
-import { Course, CourseApiModel } from '../../types/course';
+import { Author, Course, CourseApiModel } from '../../types/course';
 import { formatDate, formatDateToISO } from '../../utils/transformers';
 
 export type FormData = {
@@ -26,7 +26,7 @@ export type FormData = {
     description: FormControl<string>;
     duration: FormControl<number | null>;
     creationDate: FormControl<string>;
-    authors: FormControl<string>;
+    authors: FormControl<Author[]>;
 };
 
 @Component({
@@ -34,7 +34,7 @@ export type FormData = {
     templateUrl: './add-edit-course-form.component.html',
     styleUrls: ['./add-edit-course-form.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.ShadowDom,
+    encapsulation: ViewEncapsulation.None,
 })
 export class AddEditCourseFormComponent implements OnInit, OnChanges {
     @Input() type: 'add' | 'edit' = 'add';
@@ -50,7 +50,7 @@ export class AddEditCourseFormComponent implements OnInit, OnChanges {
         description: ['', [Validators.required, Validators.maxLength(500)]],
         duration: [null, Validators.required],
         creationDate: ['', Validators.required],
-        authors: ['', Validators.required],
+        authors: [[], Validators.required],
     });
 
     public errorMessages = {

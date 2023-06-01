@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { delay, map, Observable, tap } from 'rxjs';
 
-import { Course, CourseApiModel } from '../../types/course';
+import { Author, Course, CourseApiModel } from '../../types/course';
 import { BASE_URL } from '../constants';
 import { transformCourseFromApiModel } from '../../utils/transformers';
 
@@ -58,5 +58,11 @@ export class CoursesService {
 
     public deleteCourse(id: string): Observable<void> {
         return this.http.delete<void>(`${this.baseUrl}/courses/${id}`);
+    }
+
+    public getAuthors(textFragment = ''): Observable<Author[]> {
+        return this.http.get<Author[]>(
+            `${this.baseUrl}/authors?textFragment=${textFragment}`
+        );
     }
 }

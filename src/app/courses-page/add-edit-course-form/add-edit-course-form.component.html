@@ -1,4 +1,4 @@
-<div class="container">
+<div class="add-edit-form-container">
     <form [formGroup]="form" (ngSubmit)="onSave()" class="form">
         <h1>{{ heading }}</h1>
         <label>
@@ -39,7 +39,8 @@
             <span
                 class="error-message"
                 *ngIf="
-                    f.description.touched && f.description?.hasError('required')
+                    f.description.touched &&
+                    f?.description?.hasError('required')
                 "
                 >{{ errorMessages.required }}</span
             >
