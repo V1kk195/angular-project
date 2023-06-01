@@ -1,7 +1,9 @@
-import { Component, Input } from '@angular/core';
-import { AuthService } from '../core/auth/auth.service';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { NgForm } from '@angular/forms';
+
+import { AuthService } from '../core/auth/auth.service';
 import { AuthActions } from '../state/auth';
 
 @Component({
@@ -10,8 +12,8 @@ import { AuthActions } from '../state/auth';
     styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent {
-    @Input() email = '';
-    @Input() password = '';
+    email = '';
+    password = '';
 
     constructor(
         private authService: AuthService,
@@ -19,7 +21,7 @@ export class LoginPageComponent {
         private store: Store
     ) {}
 
-    public onLogIn() {
+    public onLogIn(form: NgForm) {
         this.store.dispatch(
             AuthActions.login({
                 credentials: { login: this.email, password: this.password },

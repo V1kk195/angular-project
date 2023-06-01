@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="form">
+    <form #f="ngForm" (ngSubmit)="onLogIn(f)" class="form">
         <h1>Login</h1>
         <label>
             Email
@@ -8,8 +8,14 @@
                 placeholder="example@mail.com"
                 name="email"
                 required
+                #emailField="ngModel"
                 [(ngModel)]="email"
             />
+            <span
+                class="error-message"
+                *ngIf="emailField.touched && emailField?.hasError('required')"
+                >This field is required</span
+            >
         </label>
 
         <label>
@@ -19,10 +25,20 @@
                 name="password"
                 placeholder="************"
                 required
+                #passwordField="ngModel"
                 [(ngModel)]="password"
             />
+            <span
+                class="error-message"
+                *ngIf="
+                    passwordField.touched && passwordField?.hasError('required')
+                "
+                >This field is required</span
+            >
         </label>
 
-        <button (click)="onLogIn()" class="button-submit">Login</button>
-    </div>
+        <button type="submit" class="button-submit" [disabled]="!f.valid">
+            Login
+        </button>
+    </form>
 </div>

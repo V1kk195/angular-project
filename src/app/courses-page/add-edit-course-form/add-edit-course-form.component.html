@@ -107,16 +107,5 @@
                 Save
             </button>
         </div>
-
-        <p>STATUS {{ form.status }}</p>
-        <p>VALID {{ form.valid }}</p>
-        <div *ngFor="let key of form.value | keyvalue">
-            <p>{{ key.key }} : {{ key.value }}</p>
-        </div>
-
-        <div *ngFor="let key of f.title.errors || {} | keyvalue">
-            ERRORS
-            <p>{{ key.key }} : {{ key.value }}</p>
-        </div>
     </form>
 </div>
