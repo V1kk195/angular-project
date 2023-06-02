@@ -1,4 +1,35 @@
 {
+	"ADD_EDIT_FORM": {
+		"AUTHORS_FIELD": {
+			"LABEL": "Auteurs",
+			"NO_DATA": "Pas de données",
+			"PLACEHOLDER": "Commencer à écrire..."
+		},
+		"BUTTONS": {
+			"CANCEL": "Annuler",
+			"SUBMIT": "Sauver"
+		},
+		"DATE_FIELD": {
+			"LABEL": "Date",
+			"PLACEHOLDER": ""
+		},
+		"DESCRIPTION_FIELD": {
+			"LABEL": "Description",
+			"PLACEHOLDER": "Ajouter une description"
+		},
+		"DURATION_FIELD": {
+			"LABEL": "Durée",
+			"PLACEHOLDER": "Minutes"
+		},
+		"TITLE_FIELD": {
+			"LABEL": "Titre",
+			"PLACEHOLDER": "Titre d'entrée"
+		},
+		"TITLES": {
+			"ADD": "Nouveau cours",
+			"EDIT": "Modifier le cours"
+		}
+	},
 	"COURSES_PAGE": {
 		"BUTTONS": {
 			"LOAD_MORE": "En savoir plus"
@@ -24,6 +55,7 @@
 	},
 	"FORM": {
 		"ERRORS": {
+			"MAX_LENGTH": "La longueur maximale doit être",
 			"REQUIRED_FIELD": "Ce champ est obligatoire"
 		}
 	},

@@ -2,10 +2,12 @@
     <form [formGroup]="form" (ngSubmit)="onSave()" class="form">
         <h1>{{ heading }}</h1>
         <label>
-            Title:
+            {{ 'ADD_EDIT_FORM.TITLE_FIELD.LABEL' | translate }}:
             <input
                 type="text"
-                placeholder="Input title"
+                [placeholder]="
+                    'ADD_EDIT_FORM.TITLE_FIELD.PLACEHOLDER' | translate
+                "
                 name="title"
                 required
                 formControlName="title"
@@ -27,10 +29,12 @@
         </label>
 
         <label>
-            Decription:
+            {{ 'ADD_EDIT_FORM.DESCRIPTION_FIELD.LABEL' | translate }}:
             <textarea
                 type="text"
-                placeholder="Add description"
+                [placeholder]="
+                    'ADD_EDIT_FORM.DESCRIPTION_FIELD.PLACEHOLDER' | translate
+                "
                 name="description"
                 required
                 rows="4"
@@ -98,13 +102,15 @@
         </div>
 
         <div class="buttons">
-            <button class="button-cancel" (click)="onCancel()">Cancel</button>
+            <button class="button-cancel" (click)="onCancel()">
+                {{ 'ADD_EDIT_FORM.BUTTONS.CANCEL' | translate }}
+            </button>
             <button
                 type="submit"
                 [disabled]="!form.valid"
                 class="button-submit"
             >
-                Save
+                {{ 'ADD_EDIT_FORM.BUTTONS.SUBMIT' | translate }}
             </button>
         </div>
     </form>

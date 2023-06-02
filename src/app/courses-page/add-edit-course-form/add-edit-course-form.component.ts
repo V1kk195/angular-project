@@ -16,6 +16,7 @@ import {
     FormGroup,
     Validators,
 } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 import { ROUTES_NAMES } from '../../core/constants';
 import { Author, Course, CourseApiModel } from '../../types/course';
@@ -41,6 +42,8 @@ export class AddEditCourseFormComponent implements OnInit, OnChanges {
     @Input() courseInfo?: Course;
     @Output() saveEvent = new EventEmitter<CourseApiModel>();
 
+    private titleAdd = '';
+    private titleEdit = '';
     public heading = '';
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -58,14 +61,36 @@ export class AddEditCourseFormComponent implements OnInit, OnChanges {
         maxlength: (max: number) => `Maximum length should be ${max}`,
     };
 
-    constructor(private router: Router, private fb: FormBuilder) {}
+    constructor(
+        private router: Router,
+        private fb: FormBuilder,
+        private translate: TranslateService
+    ) {}
 
     public get f() {
         return this.form?.controls;
     }
 
     public ngOnInit() {
-        this.heading = this.type === 'add' ? 'New course' : 'Edit course';
+        this.translate
+            .stream([
+                'ADD_EDIT_FORM.TITLES.ADD',
+                'ADD_EDIT_FORM.TITLES.EDIT',
+                'FORM.ERRORS.REQUIRED_FIELD',
+                'FORM.ERRORS.MAX_LENGTH',
+            ])
+            .subscribe((data) => {
+                this.titleAdd = data['ADD_EDIT_FORM.TITLES.ADD'];
+                this.titleEdit = data['ADD_EDIT_FORM.TITLES.EDIT'];
+                this.heading =
+                    this.type === 'add' ? this.titleAdd : this.titleEdit;
+
+                this.errorMessages = {
+                    required: data['FORM.ERRORS.REQUIRED_FIELD'],
+                    maxlength: (max: number) =>
+                        `${data['FORM.ERRORS.MAX_LENGTH']} ${max}`,
+                };
+            });
     }
 
     public ngOnChanges(changes: SimpleChanges) {
