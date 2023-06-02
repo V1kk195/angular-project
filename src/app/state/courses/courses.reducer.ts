@@ -3,8 +3,6 @@ import { createReducer, on } from '@ngrx/store';
 import { CoursesActions } from '.';
 import { Course } from '../../types/course';
 
-export const coursesFeatureKey = 'courses';
-
 export interface CoursesState {
     items: Course[];
     length: number;

@@ -5,6 +5,7 @@ export interface Course {
     duration: number;
     description: string;
     topRated: boolean;
+    authors: Author[];
 }
 
 export type Author = {
@@ -15,6 +16,7 @@ export type Author = {
 export type CourseApiModel = {
     id?: number;
     name: string;
+    // date is in ISO format
     date: string;
     length: number;
     description: string;

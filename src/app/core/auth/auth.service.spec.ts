@@ -17,7 +17,7 @@ describe('AuthService', () => {
     it('should log in', () => {
         const spy = spyOn(console, 'log');
 
-        service.logIn({ email: 'test@mail.com', password: '123' });
+        service.logIn({ login: 'test@mail.com', password: '123' });
 
         expect(spy).toHaveBeenCalledTimes(1);
     });

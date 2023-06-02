@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Course } from '../../types/course';
-import { CoursesService } from '../../core/courses-services/courses.service';
 import { LoaderService } from '../../shared/loader/service/loader.service';
 import {
     CoursesActions,
@@ -20,11 +19,7 @@ export class CoursesListComponent implements OnInit {
     public courses$ = this.store.select(selectCoursesList);
     public coursesCount$ = this.store.select(selectCoursesLength);
 
-    constructor(
-        public coursesService: CoursesService,
-        public loaderService: LoaderService,
-        private store: Store
-    ) {}
+    constructor(public loaderService: LoaderService, private store: Store) {}
 
     public ngOnInit(): void {
         this.loadCourses();

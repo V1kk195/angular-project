@@ -24,11 +24,11 @@ export class AuthService {
     }
 
     public logOut(): void {
-        localStorage.removeItem('token');
+        this.cookieService.delete('token');
     }
 
     public get isAuthenticated(): boolean {
-        return !!localStorage.getItem('token');
+        return !!this.cookieService.get('token');
     }
 
     public getUserInfo(): Observable<CurrentUserResponse> {

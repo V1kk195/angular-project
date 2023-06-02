@@ -1,10 +1,40 @@
-<label class="label">
+<label class="label" [formGroup]="form!">
     Authors:
-    <input
-        type="text"
-        placeholder="Start typing"
-        name="authors"
-        required
-        [(ngModel)]="authors"
-    />
+    <div class="select-container" role="textbox">
+        <div class="chips">
+            <div *ngFor="let option of chosenAuthors">
+                {{ option.name
+                }}<span (click)="onDeleteOption(option)" class="deleteIcon"
+                    >x</span
+                >
+            </div>
+        </div>
+
+        <input
+            name="authors"
+            required
+            (keyup)="onInputChange($event)"
+            [(ngModel)]="value"
+            [ngModelOptions]="{ standalone: true }"
+        />
+    </div>
+
+    <select
+        [formControlName]="controlName"
+        multiple
+        *ngIf="value"
+        class="dropdown"
+    >
+        <option *ngIf="(authors$ | async)?.length === 0" disabled>
+            No data
+        </option>
+
+        <option
+            *ngFor="let author of authors$ | async"
+            [value]="author"
+            (click)="onOptionClick(author)"
+        >
+            {{ author.name }}
+        </option>
+    </select>
 </label>

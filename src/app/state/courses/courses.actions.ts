@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Course } from '../../types/course';
+import { Course, CourseApiModel } from '../../types/course';
 
 export const loadCourses = createAction(
     '[Courses Page] Load Courses',
@@ -27,5 +27,33 @@ export const deleteCourseSuccess = createAction(
 
 export const deleteCourseFailure = createAction(
     '[Courses API] Delete Course Failure',
+    props<{ error: any }>()
+);
+
+export const createCourse = createAction(
+    '[Add New Course Page] Create Course',
+    props<{ course: CourseApiModel }>()
+);
+
+export const createCourseSuccess = createAction(
+    '[Courses API] Create Course Success'
+);
+
+export const createCourseFailure = createAction(
+    '[Courses API] Create Course Failure',
+    props<{ error: any }>()
+);
+
+export const updateCourse = createAction(
+    '[Edit Course Page] Update Course Failure',
+    props<{ course: CourseApiModel }>()
+);
+
+export const updateCourseSuccess = createAction(
+    '[Courses API] Update Course Success'
+);
+
+export const updateCourseFailure = createAction(
+    '[Courses API] Update Course Failure',
     props<{ error: any }>()
 );

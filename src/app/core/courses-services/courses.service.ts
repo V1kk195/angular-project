@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { delay, map, Observable, tap } from 'rxjs';
 
-import { Course, CourseApiModel } from '../../types/course';
+import { Author, Course, CourseApiModel } from '../../types/course';
 import { BASE_URL } from '../constants';
+import { transformCourseFromApiModel } from '../../utils/transformers';
 
 @Injectable({
     providedIn: 'root',
@@ -18,16 +19,7 @@ export class CoursesService {
     constructor(private http: HttpClient) {}
 
     private transformData(data: CourseApiModel[]): Course[] {
-        return data.map(
-            (item): Course => ({
-                id: item.id?.toString() || '',
-                title: item.name,
-                creationDate: item.date,
-                duration: item.length,
-                description: item.description,
-                topRated: item.isTopRated,
-            })
-        );
+        return data.map(transformCourseFromApiModel);
     }
 
     public getCourses(
@@ -54,22 +46,23 @@ export class CoursesService {
     public getCourseById(id: string): Observable<Course> {
         return this.http
             .get<CourseApiModel>(`${this.baseUrl}/courses/${id}`)
-            .pipe(map((course) => this.transformData([course])[0]));
+            .pipe(map((course) => transformCourseFromApiModel(course)));
     }
 
-    public updateCourse(data: Course): Course {
-        this.coursesList = this.coursesList.map((item) => {
-            if (item.id === data.id) {
-                return data;
-            }
-
-            return item;
-        });
-
-        return data;
+    public updateCourse(data: CourseApiModel): Observable<CourseApiModel> {
+        return this.http.patch<CourseApiModel>(
+            `${this.baseUrl}/courses/${data.id}`,
+            data
+        );
     }
 
-    public deleteCourse(id: string, count?: number): Observable<void> {
+    public deleteCourse(id: string): Observable<void> {
         return this.http.delete<void>(`${this.baseUrl}/courses/${id}`);
+    }
+
+    public getAuthors(textFragment = ''): Observable<Author[]> {
+        return this.http.get<Author[]>(
+            `${this.baseUrl}/authors?textFragment=${textFragment}`
+        );
     }
 }
