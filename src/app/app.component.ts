@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
     public title = 'video-course-portal';
+    public languages = ['en', 'ru', 'fr'];
 
     constructor(translate: TranslateService) {
         translate.setDefaultLang('en');

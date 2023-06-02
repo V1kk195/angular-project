@@ -1,0 +1,19 @@
+{
+	"FORM": {
+		"ERRORS": {
+			"REQUIRED_FIELD": "Это обязательное поле"
+		}
+	},
+	"LOGIN_PAGE": {
+		"LOGIN_FORM": {
+			"EMAIL_FIELD": {
+				"LABEL": "Эл. адрес"
+			},
+			"PASSWORD_FIELD": {
+				"LABEL": "Пароль"
+			},
+			"SUBMIT_BUTTON": "Войти",
+			"TITLE": "Войти"
+		}
+	}
+}
