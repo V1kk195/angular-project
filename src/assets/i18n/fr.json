@@ -30,6 +30,11 @@
 			"EDIT": "Modifier le cours"
 		}
 	},
+	"BREADCRUMBS": {
+		"ADD_COURSE": "Nouveau cours",
+		"COURSES": "Cours",
+		"EDIT_COURSE": "Modifier le cours"
+	},
 	"COURSES_PAGE": {
 		"BUTTONS": {
 			"LOAD_MORE": "En savoir plus"

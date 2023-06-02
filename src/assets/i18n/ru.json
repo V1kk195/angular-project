@@ -30,6 +30,11 @@
 			"EDIT": "Редактировать курс"
 		}
 	},
+	"BREADCRUMBS": {
+		"ADD_COURSE": "Новый курс",
+		"COURSES": "Курсы",
+		"EDIT_COURSE": "Редактировать курс"
+	},
 	"COURSES_PAGE": {
 		"BUTTONS": {
 			"LOAD_MORE": "Ещё"

@@ -15,7 +15,7 @@ const routes: Routes = [
         title: 'Courses',
         data: {
             breadcrumbs: {
-                caption: 'Courses',
+                caption: 'BREADCRUMBS.COURSES',
             },
         },
         children: [
@@ -34,7 +34,7 @@ const routes: Routes = [
                 canActivate: [authGuard],
                 data: {
                     breadcrumbs: {
-                        caption: 'New Course',
+                        caption: 'BREADCRUMBS.ADD_COURSE',
                     },
                 },
             },
@@ -44,7 +44,7 @@ const routes: Routes = [
                 canActivate: [authGuard],
                 data: {
                     breadcrumbs: {
-                        caption: 'Edit Course',
+                        caption: 'BREADCRUMBS.EDIT_COURSE',
                     },
                 },
                 resolve: {

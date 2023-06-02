@@ -23,7 +23,13 @@ import { TranslateModule } from '@ngx-translate/core';
         IfAuthenticatedDirective,
         LoaderComponent,
     ],
-    imports: [CommonModule, FormsModule, AngularSvgIconModule, RouterLink],
+    imports: [
+        CommonModule,
+        FormsModule,
+        AngularSvgIconModule,
+        RouterLink,
+        TranslateModule.forChild(),
+    ],
     exports: [
         CommonModule,
         FormsModule,
