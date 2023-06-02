@@ -3,6 +3,8 @@
 
     <div class="buttons" *appIfAuthenticated>
         <button>{{ (userInfo$ | async)?.firstName }}</button>
-        <button (click)="onLogOut()">Log out</button>
+        <button (click)="onLogOut()">
+            {{ 'HEADER.BUTTONS.LOGOUT.LABEL' | translate }}
+        </button>
     </div>
 </header>

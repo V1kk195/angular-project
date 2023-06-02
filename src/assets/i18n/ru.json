@@ -12,11 +12,26 @@
 				"HOURS": "ч",
 				"MINUTES": "мин"
 			}
+		},
+		"HEADER": {
+			"ADD_BUTTON": {
+				"LABEL": "Добавить курс"
+			},
+			"SEARCH": {
+				"PLACEHOLDER": "Начните печатать"
+			}
 		}
 	},
 	"FORM": {
 		"ERRORS": {
 			"REQUIRED_FIELD": "Это обязательное поле"
+		}
+	},
+	"HEADER": {
+		"BUTTONS": {
+			"LOGOUT": {
+				"LABEL": "Выйти"
+			}
 		}
 	},
 	"LOGIN_PAGE": {

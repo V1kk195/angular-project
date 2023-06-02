@@ -12,11 +12,26 @@
 				"HOURS": "h",
 				"MINUTES": "min"
 			}
+		},
+		"HEADER": {
+			"ADD_BUTTON": {
+				"LABEL": "Add Course"
+			},
+			"SEARCH": {
+				"PLACEHOLDER": "Type to search"
+			}
 		}
 	},
 	"FORM": {
 		"ERRORS": {
 			"REQUIRED_FIELD": "This field is required"
+		}
+	},
+	"HEADER": {
+		"BUTTONS": {
+			"LOGOUT": {
+				"LABEL": "Log out"
+			}
 		}
 	},
 	"LOGIN_PAGE": {
