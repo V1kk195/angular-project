@@ -1,8 +1,8 @@
 <div class="container">
     <form #f="ngForm" (ngSubmit)="onLogIn(f)" class="form">
-        <h1>Login</h1>
+        <h1>{{ 'LOGIN_PAGE.LOGIN_FORM.TITLE' | translate }}</h1>
         <label>
-            Email
+            {{ 'LOGIN_PAGE.LOGIN_FORM.EMAIL_FIELD.LABEL' | translate }}
             <input
                 type="email"
                 placeholder="example@mail.com"
@@ -14,12 +14,12 @@
             <span
                 class="error-message"
                 *ngIf="emailField.touched && emailField?.hasError('required')"
-                >This field is required</span
+                >{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</span
             >
         </label>
 
         <label>
-            Password
+            {{ 'LOGIN_PAGE.LOGIN_FORM.PASSWORD_FIELD.LABEL' | translate }}
             <input
                 type="password"
                 name="password"
@@ -33,12 +33,12 @@
                 *ngIf="
                     passwordField.touched && passwordField?.hasError('required')
                 "
-                >This field is required</span
+                >{{ 'FORM.ERRORS.REQUIRED_FIELD' | translate }}</span
             >
         </label>
 
         <button type="submit" class="button-submit" [disabled]="!f.valid">
-            Login
+            {{ 'LOGIN_PAGE.LOGIN_FORM.SUBMIT_BUTTON' | translate }}
         </button>
     </form>
 </div>

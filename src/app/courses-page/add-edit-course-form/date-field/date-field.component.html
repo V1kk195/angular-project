@@ -1,10 +1,4 @@
 <label class="label" [formGroup]="form!">
-    Date:
-    <input
-        type="date"
-        placeholder="MM/DD/YYYY"
-        name="date"
-        required
-        [formControlName]="controlName"
-    />
+    {{ 'ADD_EDIT_FORM.DATE_FIELD.LABEL' | translate }}:
+    <input type="date" name="date" required [formControlName]="controlName" />
 </label>

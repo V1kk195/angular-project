@@ -1,5 +1,5 @@
 <label class="label" [formGroup]="form!">
-    Authors:
+    {{ 'ADD_EDIT_FORM.AUTHORS_FIELD.LABEL' | translate }}:
     <div class="select-container" role="textbox">
         <div class="chips">
             <div *ngFor="let option of chosenAuthors">
@@ -13,6 +13,9 @@
         <input
             name="authors"
             required
+            [placeholder]="
+                'ADD_EDIT_FORM.AUTHORS_FIELD.PLACEHOLDER' | translate
+            "
             (keyup)="onInputChange($event)"
             [(ngModel)]="value"
             [ngModelOptions]="{ standalone: true }"
@@ -26,7 +29,7 @@
         class="dropdown"
     >
         <option *ngIf="(authors$ | async)?.length === 0" disabled>
-            No data
+            {{ 'ADD_EDIT_FORM.AUTHORS_FIELD.NO_DATA' | translate }}
         </option>
 
         <option

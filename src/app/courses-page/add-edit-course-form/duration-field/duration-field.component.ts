@@ -8,8 +8,6 @@ import {
 import { FormGroup } from '@angular/forms';
 import { take } from 'rxjs';
 
-import { Author } from '../../../types/course';
-
 @Component({
     selector: 'app-duration-field',
     templateUrl: './duration-field.component.html',

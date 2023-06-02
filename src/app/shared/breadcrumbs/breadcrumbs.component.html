@@ -1,7 +1,8 @@
 <div class="container">
     <div>
         <span *ngFor="let item of items; last as isLast" [routerLink]="item.url"
-            >{{ item.caption }}<span *ngIf="!isLast" class="arrow"> > </span>
+            >{{ item.caption | translate
+            }}<span *ngIf="!isLast" class="arrow"> > </span>
         </span>
     </div>
 </div>

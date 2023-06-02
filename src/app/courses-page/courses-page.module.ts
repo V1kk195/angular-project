@@ -16,6 +16,7 @@ import { AuthorsFieldComponent } from './add-edit-course-form/authors-field/auth
 import { DateFieldComponent } from './add-edit-course-form/date-field/date-field.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CoursesRoutingModule } from './courses-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     declarations: [
@@ -37,6 +38,7 @@ import { CoursesRoutingModule } from './courses-routing.module';
         RouterOutlet,
         ReactiveFormsModule,
         CoursesRoutingModule,
+        TranslateModule.forChild(),
     ],
     exports: [CoursesPageComponent, CoursesListComponent],
 })

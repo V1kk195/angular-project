@@ -1,0 +1,86 @@
+{
+	"ADD_EDIT_FORM": {
+		"AUTHORS_FIELD": {
+			"LABEL": "Авторы",
+			"NO_DATA": "Нет данных",
+			"PLACEHOLDER": "Начните печатать..."
+		},
+		"BUTTONS": {
+			"CANCEL": "Отменить",
+			"SUBMIT": "Сохранить"
+		},
+		"DATE_FIELD": {
+			"LABEL": "Дата",
+			"PLACEHOLDER": ""
+		},
+		"DESCRIPTION_FIELD": {
+			"LABEL": "Описание",
+			"PLACEHOLDER": "Добавьте описание"
+		},
+		"DURATION_FIELD": {
+			"LABEL": "Продолжительность",
+			"PLACEHOLDER": "Минуты"
+		},
+		"TITLE_FIELD": {
+			"LABEL": "Название",
+			"PLACEHOLDER": "Введите название"
+		},
+		"TITLES": {
+			"ADD": "Новый курс",
+			"EDIT": "Редактировать курс"
+		}
+	},
+	"BREADCRUMBS": {
+		"ADD_COURSE": "Новый курс",
+		"COURSES": "Курсы",
+		"EDIT_COURSE": "Редактировать курс"
+	},
+	"COURSES_PAGE": {
+		"BUTTONS": {
+			"LOAD_MORE": "Ещё"
+		},
+		"COURSE": {
+			"BUTTONS": {
+				"DELETE": "Удалить",
+				"EDIT": "Редактировать"
+			},
+			"TIME": {
+				"HOURS": "ч",
+				"MINUTES": "мин"
+			}
+		},
+		"HEADER": {
+			"ADD_BUTTON": {
+				"LABEL": "Добавить курс"
+			},
+			"SEARCH": {
+				"PLACEHOLDER": "Начните печатать"
+			}
+		}
+	},
+	"FORM": {
+		"ERRORS": {
+			"MAX_LENGTH": "Максимальная длина",
+			"REQUIRED_FIELD": "Это обязательное поле"
+		}
+	},
+	"HEADER": {
+		"BUTTONS": {
+			"LOGOUT": {
+				"LABEL": "Выйти"
+			}
+		}
+	},
+	"LOGIN_PAGE": {
+		"LOGIN_FORM": {
+			"EMAIL_FIELD": {
+				"LABEL": "Эл. адрес"
+			},
+			"PASSWORD_FIELD": {
+				"LABEL": "Пароль"
+			},
+			"SUBMIT_BUTTON": "Войти",
+			"TITLE": "Войти"
+		}
+	}
+}

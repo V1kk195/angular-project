@@ -1,9 +1,11 @@
 <div class="durationRow" [formGroup]="form!">
     <label class="label">
-        Duration:
+        {{ 'ADD_EDIT_FORM.DURATION_FIELD.LABEL' | translate }}:
         <input
             type="number"
-            placeholder="minutes"
+            [placeholder]="
+                'ADD_EDIT_FORM.DURATION_FIELD.PLACEHOLDER' | translate
+            "
             name="duration"
             required
             [formControlName]="controlName"

@@ -2,7 +2,7 @@
     <form class="search">
         <input
             id="searchInput"
-            placeholder="Type to search"
+            [placeholder]="'COURSES_PAGE.HEADER.SEARCH.PLACEHOLDER' | translate"
             (keyup)="onSearchInputChange($event)"
         />
     </form>
@@ -12,6 +12,6 @@
         [routerLink]="addCourseLink"
         class="add-course-button"
     >
-        + Add course
+        + {{ 'COURSES_PAGE.HEADER.ADD_BUTTON.LABEL' | translate }}
     </button>
 </div>

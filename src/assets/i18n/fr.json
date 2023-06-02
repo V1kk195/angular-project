@@ -1,0 +1,86 @@
+{
+	"ADD_EDIT_FORM": {
+		"AUTHORS_FIELD": {
+			"LABEL": "Auteurs",
+			"NO_DATA": "Pas de données",
+			"PLACEHOLDER": "Commencer à écrire..."
+		},
+		"BUTTONS": {
+			"CANCEL": "Annuler",
+			"SUBMIT": "Sauver"
+		},
+		"DATE_FIELD": {
+			"LABEL": "Date",
+			"PLACEHOLDER": ""
+		},
+		"DESCRIPTION_FIELD": {
+			"LABEL": "Description",
+			"PLACEHOLDER": "Ajouter une description"
+		},
+		"DURATION_FIELD": {
+			"LABEL": "Durée",
+			"PLACEHOLDER": "Minutes"
+		},
+		"TITLE_FIELD": {
+			"LABEL": "Titre",
+			"PLACEHOLDER": "Titre d'entrée"
+		},
+		"TITLES": {
+			"ADD": "Nouveau cours",
+			"EDIT": "Modifier le cours"
+		}
+	},
+	"BREADCRUMBS": {
+		"ADD_COURSE": "Nouveau cours",
+		"COURSES": "Cours",
+		"EDIT_COURSE": "Modifier le cours"
+	},
+	"COURSES_PAGE": {
+		"BUTTONS": {
+			"LOAD_MORE": "En savoir plus"
+		},
+		"COURSE": {
+			"BUTTONS": {
+				"DELETE": "Supprimer",
+				"EDIT": "Modifier"
+			},
+			"TIME": {
+				"HOURS": "h",
+				"MINUTES": "min"
+			}
+		},
+		"HEADER": {
+			"ADD_BUTTON": {
+				"LABEL": "Ajouter un cours"
+			},
+			"SEARCH": {
+				"PLACEHOLDER": "Tapez pour rechercher"
+			}
+		}
+	},
+	"FORM": {
+		"ERRORS": {
+			"MAX_LENGTH": "La longueur maximale doit être",
+			"REQUIRED_FIELD": "Ce champ est obligatoire"
+		}
+	},
+	"HEADER": {
+		"BUTTONS": {
+			"LOGOUT": {
+				"LABEL": "Déconnexion"
+			}
+		}
+	},
+	"LOGIN_PAGE": {
+		"LOGIN_FORM": {
+			"EMAIL_FIELD": {
+				"LABEL": "Email"
+			},
+			"PASSWORD_FIELD": {
+				"LABEL": "Mot de passe"
+			},
+			"SUBMIT_BUTTON": "S'identifier",
+			"TITLE": "S'identifier"
+		}
+	}
+}

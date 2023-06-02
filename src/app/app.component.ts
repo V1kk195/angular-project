@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from './core/auth/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-root',
@@ -8,6 +8,10 @@ import { AuthService } from './core/auth/auth.service';
 })
 export class AppComponent {
     public title = 'video-course-portal';
+    public languages = ['en', 'ru', 'fr'];
 
-    constructor(public authService: AuthService) {}
+    constructor(translate: TranslateService) {
+        translate.setDefaultLang('en');
+        translate.use('en');
+    }
 }
