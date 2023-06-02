@@ -13,7 +13,9 @@
             ></app-course>
         </li>
     </ul>
-    <button class="load-button" (click)="onLoadMoreClick()">Load more</button>
+    <button class="load-button" (click)="onLoadMoreClick()">
+        {{ 'COURSES_PAGE.BUTTONS.LOAD_MORE' | translate }}
+    </button>
 </ng-container>
 <ng-template #elseBlock>
     <div class="no-data">No data. Feel free to add new courses</div>

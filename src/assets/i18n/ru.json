@@ -1,4 +1,19 @@
 {
+	"COURSES_PAGE": {
+		"BUTTONS": {
+			"LOAD_MORE": "Ещё"
+		},
+		"COURSE": {
+			"BUTTONS": {
+				"DELETE": "Удалить",
+				"EDIT": "Редактировать"
+			},
+			"TIME": {
+				"HOURS": "ч",
+				"MINUTES": "мин"
+			}
+		}
+	},
 	"FORM": {
 		"ERRORS": {
 			"REQUIRED_FIELD": "Это обязательное поле"

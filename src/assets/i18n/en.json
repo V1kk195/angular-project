@@ -1,4 +1,19 @@
 {
+	"COURSES_PAGE": {
+		"BUTTONS": {
+			"LOAD_MORE": "Load More"
+		},
+		"COURSE": {
+			"BUTTONS": {
+				"DELETE": "Delete",
+				"EDIT": "Edit"
+			},
+			"TIME": {
+				"HOURS": "h",
+				"MINUTES": "min"
+			}
+		}
+	},
 	"FORM": {
 		"ERRORS": {
 			"REQUIRED_FIELD": "This field is required"
