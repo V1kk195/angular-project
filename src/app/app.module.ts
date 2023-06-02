@@ -1,6 +1,6 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -17,6 +17,12 @@ import { httpInterceptorProviders } from './core/interceptors';
 import { AuthEffects } from './state/auth/auth.effects';
 import { rootReducer } from './state';
 import { CoursesEffects } from './state/courses/courses.effects';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http);
+}
 
 @NgModule({
     declarations: [AppComponent],
@@ -29,6 +35,14 @@ import { CoursesEffects } from './state/courses/courses.effects';
         LoginPageModule,
         HttpClientModule,
         AngularSvgIconModule.forRoot(),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient],
+            },
+            defaultLanguage: 'en',
+        }),
         StoreModule.forRoot(rootReducer),
         EffectsModule.forRoot([AuthEffects, CoursesEffects]),
         StoreDevtoolsModule.instrument({

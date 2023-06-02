@@ -11,6 +11,7 @@ import { IfAuthenticatedDirective } from './ifAuthenticated/if-authenticated.dir
 import { LoaderComponent } from './loader/loader.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import { RouterLink } from '@angular/router';
         OrderByPipe,
         IfAuthenticatedDirective,
         LoaderComponent,
+        TranslateModule,
     ],
 })
 export class SharedModule {}

@@ -1,0 +1,19 @@
+{
+    "LOGIN_PAGE": {
+        "LOGIN_FORM": {
+            "TITLE": "Login",
+            "EMAIL_FIELD": {
+                "LABEL": "Email"
+            },
+            "PASSWORD_FIELD": {
+                "LABEL": "Password"
+            },
+            "SUBMIT_BUTTON": "Login"
+        }
+    },
+    "FORM": {
+        "ERRORS": {
+            "REQUIRED_FIELD": "This field is required"
+        }
+    }
+}
